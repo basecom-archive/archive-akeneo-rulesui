@@ -1,0 +1,3 @@
+css:
+    basecom_ui:
+        - bundles/basecomrulesengine/css/rules.less

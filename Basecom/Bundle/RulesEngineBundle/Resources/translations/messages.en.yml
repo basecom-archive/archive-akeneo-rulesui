@@ -1,0 +1,16 @@
+basecom:
+    rules_engine:
+        menu_entry: Add Rule
+        edit: Edit rule
+    flash:
+        rule:
+            removed: rule successfully removed
+            saved: rule saved
+            error:
+                save: could not save rule
+                copy: it is not allowed to copy from / to the same field
+btn:
+    create:
+        rule: Add new rule
+        add-another-action: Add new action
+        add-another-condition: Add new condition
