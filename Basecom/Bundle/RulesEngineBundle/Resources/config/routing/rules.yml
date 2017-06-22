@@ -1,0 +1,8 @@
+basecom_rule_create:
+    path: /configuration/rules/create
+    defaults: { _controller:  basecom.controller.rule:createAction }
+basecom_rule_edit:
+    path: /configuration/rules/edit/{id}
+    defaults: { _controller: basecom.controller.rule:editAction }
+    requirements:
+        id: \d+
