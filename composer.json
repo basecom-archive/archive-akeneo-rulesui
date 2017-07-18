@@ -1,0 +1,24 @@
+{
+  "name": "basecom/akeneo-rulesUI",
+  "type": "symfony-bundle",
+  "description": "This bundle provides an UI for the Akeneo enterprise rules feature",
+  "homepage": "http://www.basecom.de",
+  "authors": [
+    {
+      "name": "Peter van der Zwaag",
+      "email": "vanderzwaag@basecom.de"
+    },
+    {
+      "name": "basecom GmbH & Co. KG",
+      "email": "info@basecom.de"
+    }
+  ],
+  "require": {
+    "akeneo/pim-community-enterprise": "~1.6.*"
+  },
+  "autoload": {
+    "psr-0" : {
+      "Basecom\\Bundle\\RulesEngineBundle" : ""
+    }
+  }
+}
