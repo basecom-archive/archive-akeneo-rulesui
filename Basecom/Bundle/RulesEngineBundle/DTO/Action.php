@@ -87,17 +87,17 @@ class Action
 
             case 'copy':
                 $data['from_field'] = $this->fromField;
-                $data['to_field']   = $this->fromField;
+                $data['to_field']   = $this->toField;
                 if ('' != $this->fromLocale) {
                     $data['from_locale'] = $this->fromLocale;
                 }
-                if ('' != $this->fromLocale) {
+                if ('' != $this->toLocale) {
                     $data['to_locale'] = $this->toLocale;
                 }
-                if ('' != $this->fromLocale) {
+                if ('' != $this->fromScope) {
                     $data['from_scope'] = $this->fromScope;
                 }
-                if ('' != $this->fromLocale) {
+                if ('' != $this->toScope) {
                     $data['to_scope'] = $this->toScope;
                 }
                 break;
