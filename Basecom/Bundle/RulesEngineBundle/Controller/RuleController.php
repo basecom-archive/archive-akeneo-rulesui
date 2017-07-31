@@ -159,16 +159,59 @@ class RuleController extends Controller
             $ruleDefinition = $ruleDefinitionData->getEntity();
             $violations     = $this->validator->validate($ruleDefinition);
             foreach ($ruleDefinitionData->actions as $action) {
-                if ($action->type === 'copy') {
-                    if ($action->fromField === $action->toField) {
-                        $this->request->getSession()->getFlashBag()
-                                      ->add('error', 'basecom.flash.rule.error.copy');
+                if ($action->type == 'copy') {
+                    if ($action->fromField == $action->toField) {
+                        if (isset($action->fromLocale)) {
+                            if ($action->fromLocale == $action->toLocale) {
+                                if (isset($action->fromScope)) {
+                                    if ($action->fromScope == $action->toScope) {
+                                        $this->request->getSession()->getFlashBag()
+                                                      ->add('error', 'basecom.flash.rule.error.copy');
 
-                        return [
-                            'form'           => $form->createView(),
-                            'attributesData' => $attributesData,
-                            'ruleDefinition' => $ruleDefinition,
-                        ];
+                                        return [
+                                            'form'           => $form->createView(),
+                                            'attributesData' => $attributesData,
+                                            'ruleDefinition' => $ruleDefinition,
+                                        ];
+                                    } else {
+                                        break;
+                                    }
+                                } else {
+                                    $this->request->getSession()->getFlashBag()
+                                                  ->add('error', 'basecom.flash.rule.error.copy');
+
+                                    return [
+                                        'form'           => $form->createView(),
+                                        'attributesData' => $attributesData,
+                                        'ruleDefinition' => $ruleDefinition,
+                                    ];
+                                }
+                            }
+
+                        } elseif (isset($action->fromScope)) {
+                            if ($action->fromScope == $action->toScope) {
+                                $this->request->getSession()->getFlashBag()
+                                              ->add('error', 'basecom.flash.rule.error.copy');
+
+                                return [
+                                    'form'           => $form->createView(),
+                                    'attributesData' => $attributesData,
+                                    'ruleDefinition' => $ruleDefinition,
+                                ];
+                            } else {
+                                break;
+                            }
+
+                        } else {
+                            $this->request->getSession()->getFlashBag()
+                                          ->add('error', 'basecom.flash.rule.error.copy');
+
+                            return [
+                                'form'           => $form->createView(),
+                                'attributesData' => $attributesData,
+                                'ruleDefinition' => $ruleDefinition,
+                            ];
+                        }
                     }
                 }
             }
