@@ -1,8 +1,9 @@
 {
-  "name": "basecom/akeneo-rulesUI",
+  "name": "basecom/akeneo-rules-ui",
   "type": "symfony-bundle",
   "description": "This bundle provides an UI for the Akeneo enterprise rules feature",
   "homepage": "http://www.basecom.de",
+  "license": "MIT",
   "authors": [
     {
       "name": "Peter van der Zwaag",
@@ -14,7 +15,7 @@
     }
   ],
   "require": {
-    "akeneo/pim-community-enterprise": "~1.6.*"
+    "akeneo/pim-community-enterprise": "1.6.*"
   },
   "autoload": {
     "psr-0" : {
