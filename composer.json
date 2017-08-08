@@ -15,7 +15,7 @@
     }
   ],
   "require": {
-    "akeneo/pim-community-enterprise": "1.6.*"
+    "akeneo/pim-enterprise-dev": "1.6.*"
   },
   "autoload": {
     "psr-0" : {
