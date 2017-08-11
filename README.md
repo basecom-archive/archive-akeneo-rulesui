@@ -4,6 +4,16 @@
 Akeneo PIM Enterprise Edition 1.6.~
 
 ## Installation
+
+### Install via composer
+If you want to install this bundle via composer you can either use the following command:
+```
+$ composer require basecom/akeneo-rules-ui
+```
+
+or include the bundle in your `composer.json` with the desired version.
+
+### After installation
 Enable the bundle in the `app/AppKernel.php` file in the `registerBundles()` method:
 
 ```php
