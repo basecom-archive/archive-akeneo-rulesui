@@ -1,0 +1,12 @@
+config:
+    config:
+        pim/controller-registry:
+            defaultController:
+                module: pim/controller/template
+            controllers:
+                basecom_rule_edit:
+                    module: pim/controller/form
+                basecom_rule_create:
+                    module: pim/controller/form
+    paths:
+        bsc-rules/editview: basecomrulesengine/js/edit

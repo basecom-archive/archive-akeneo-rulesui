@@ -1,0 +1,54 @@
+{% block _rule_definition_actions_row %}
+    {{ form_label(form) }}
+    {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    {{ elements.createBtn('add-another-action', null,{'id' : 'create-add-another-action'}) }}
+    <hr>
+    <div class="AknFieldContainer rule-action-container">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+{% block _rule_definition_actions_entry_row %}
+    <div class="AknFieldContainer rule-action">
+        <div class="AknFieldContainer-inputContainer field-input">
+            <div class="rule-action rule-action-type-add">
+                {{ form_row(form.type) }}
+                {{ form_row(form.field) }}
+                {{ form_row(form.value) }}
+                {{ form_row(form.fromField) }}
+                {{ form_row(form.fromLocale) }}
+                {{ form_row(form.fromScope) }}
+                {{ form_row(form.toField) }}
+                {{ form_row(form.toLocale) }}
+                {{ form_row(form.toScope) }}
+                {{ form_row(form.locale) }}
+                {{ form_row(form.scope) }}
+                {{ form_row(form.unit) }}
+                {{ form_row(form.items) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block _rule_definition_conditions_row %}
+    {{ form_label(form) }}
+    {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    {{ elements.createBtn('add-another-condition', null,{'id' : 'create-add-another-condition'}) }}
+    <hr>
+    <div class="AknFieldContainer rule-condition-container">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+{% block _rule_definition_conditions_entry_row %}
+    <div class="AknFieldContainer rule-condition">
+        <div class="AknFieldContainer-inputContainer field-input">
+            <div class="rule-condition rule-condition-type-add">
+                {{ form_row(form.field) }}
+                {{ form_row(form.locale) }}
+                {{ form_row(form.scope) }}
+                {{ form_row(form.operator) }}
+                {{ form_row(form.values) }}
+                {{ form_row(form.unit) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -2,7 +2,7 @@
   "name": "basecom/akeneo-rules-ui",
   "type": "symfony-bundle",
   "description": "This bundle provides an UI for the Akeneo enterprise rules feature",
-  "homepage": "http://www.basecom.de",
+  "homepage": "https://www.basecom.de",
   "license": "MIT",
   "authors": [
     {
@@ -23,11 +23,12 @@
     }
   ],
   "require": {
+    "php": ">=7.0.0",
     "akeneo/pim-enterprise-dev": "2.0.*"
   },
   "autoload": {
-    "psr-0" : {
-      "Basecom\\Bundle\\RulesEngineBundle" : ""
+    "psr-0": {
+      "Basecom\\Bundle\\RulesEngineBundle": ""
     }
   }
 }

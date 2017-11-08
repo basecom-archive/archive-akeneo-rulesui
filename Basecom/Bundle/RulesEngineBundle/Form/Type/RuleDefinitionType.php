@@ -2,11 +2,14 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\Form\Type;
 
+use Basecom\Bundle\RulesEngineBundle\DTO\RuleDefinition as RuleDefinitionDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Basecom\Bundle\RulesEngineBundle\DTO\RuleDefinition as RuleDefinitionDTO;
 
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
@@ -18,10 +21,9 @@ class RuleDefinitionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this
-            ->addDefinition($builder)
-            ->addConditions($builder)
-            ->addActions($builder);
+        $this->addDefinition($builder)
+             ->addConditions($builder)
+             ->addActions($builder);
     }
 
     /**
@@ -29,11 +31,18 @@ class RuleDefinitionType extends AbstractType
      *
      * @return $this
      */
-    protected function addDefinition(FormBuilderInterface $builder)
+    protected function addDefinition(FormBuilderInterface $builder): self
     {
-        $builder->add('code', 'text', ['required' => true]);
-        $builder->add('priority', 'integer', ['required' => true]);
-        $builder->add('type', 'hidden', ['data' => 'product']);
+        $builder
+            ->add('code', TextType::class, [
+                'required' => true,
+            ])
+            ->add('priority', IntegerType::class, [
+                'required' => true,
+            ])
+            ->add('type', HiddenType::class, [
+                'data' => 'product',
+            ]);
 
         return $this;
     }
@@ -43,20 +52,19 @@ class RuleDefinitionType extends AbstractType
      *
      * @return $this
      */
-    protected function addActions(FormBuilderInterface $builder)
+    protected function addActions(FormBuilderInterface $builder): self
     {
         $builder->add(
             'actions',
-            'collection',
+            CollectionType::class,
             [
-                'type'         => 'basecom_rule_action',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'label'        => false,
-                'attr'         => [
+                'entry_type'    => ActionType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'attr'          => [
                     'class' => 'rule-action-container',
                 ],
-                'options'      => [
+                'entry_options' => [
                     'attr'  => [
                         'class' => 'rule-action',
                     ],
@@ -73,21 +81,20 @@ class RuleDefinitionType extends AbstractType
      *
      * @return $this
      */
-    protected function addConditions(FormBuilderInterface $builder)
+    protected function addConditions(FormBuilderInterface $builder): self
     {
         $builder->add(
             'conditions',
-            'collection',
+            CollectionType::class,
             [
-                'type'         => 'basecom_rule_condition',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'label'        => false,
-                'attr'         => [
+                'entry_type'    => ConditionType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'attr'          => [
                     'class' => 'rule-condition-container',
                 ],
-                'options'      => [
-                    'attr' => [
+                'entry_options' => [
+                    'attr'  => [
                         'class' => 'rule-condition',
                     ],
                     'label' => 'Condition',
@@ -113,7 +120,7 @@ class RuleDefinitionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'basecom_rule';
     }

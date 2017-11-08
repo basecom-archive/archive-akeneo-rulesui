@@ -1,15 +1,99 @@
-.basecom-rule {
-  #basecom-logo {
-    float: left;
-    background-image: url('/bundles/basecomrulesengine/logo.png');
-    background-size: contain;
-    background-color: #f8f8f9;
-    background-repeat: no-repeat;
-    font-size: 0;
-    width: 200px;
-    pointer-events: none;
-    margin-right: 40px;
+@logo-background: #f8f8f9;
+@border-white-light: #e6e8ec;
+@border-white-medium: #ddd;
+
+.AknFlash.AknFlash-FormError {
+  display: block;
+  width: auto;
+  min-height: 0;
+  left: auto;
+  opacity: 1;
+  z-index: auto;
+}
+
+.entity-edit-form {
+  .create-new-rule {
+    margin-right: 20px;
   }
+}
+
+.basecom-rule {
+  .AknColumnConfigurator {
+    padding: 0;
+    margin-right: -24px;
+    .AknColumnConfigurator-column {
+      border: none;
+    }
+  }
+  .rule-action, .rule-condition, .rule-action-container, .rule-condition-container {
+    width: 100%;
+    .btn-delete {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .AknFieldContainer-header {
+    margin-bottom: 0;
+    margin-top: 15px;
+  }
+  .action-field-values-value, .condition-field-values-value {
+    position: relative;
+    .AknFieldContainer-inputContainer {
+      width: 100%;
+    }
+    .AknFieldContainer-header {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  }
+  .action-field-values-container, .condition-field-values-container {
+    width: 100%;
+  }
+  .remove-value {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    cursor: pointer;
+  }
+  #create-add-another-action, #create-add-another-condition {
+    float: right;
+  }
+  .AknFieldContainer {
+    &.action-to-field-locale, &.action-from-field-locale {
+      padding-right: 10px;
+      float: left;
+    }
+    &.action-to-field-scope, &.action-from-field-scope {
+      padding-left: 10px;
+    }
+    &.condition-field-unit {
+      width: 100%;
+    }
+  }
+}
+
+.basecom-rule {
+  .AknTitleContainer-userMenu {
+    margin-right: 10px;
+  }
+  .AknButtonList {
+    .AknButton {
+      margin-left: 10px;
+    }
+    #basecom-logo {
+      float: left;
+      border: none;
+      background-image: url('/bundles/basecomrulesengine/logo.png');
+      background-size: contain;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      font-size: 0;
+      width: 200px;
+      pointer-events: none;
+    }
+  }
+
   .rule-engine-error {
     margin: 10px auto;
     width: 50%;
@@ -21,31 +105,31 @@
   .tabsection-content {
     float: left;
     width: 100%;
-    border: 1px solid #e6e8ec;
+    border: 1px solid @border-white-light;
   }
-  #basecom_rule {
-    .control-group.rule-condition-container {
+  #rule_definition {
+    .AknFieldContainer.rule-condition-container {
       float: left;
       margin: 20px 50px 0 0;
       padding-top: 0;
+      width: 100%;
       > label {
         margin-top: 5px;
         font-size: 30px;
       }
       > .controls {
         > .rule-condition-container {
-          > .control-group.rule-condition {
+          > .AknFieldContainer.rule-condition {
             min-height: 500px;
             padding: 5px;
-            border: 1px solid #e6e8ec;
+            border: 1px solid @border-white-light;
           }
         }
       }
       .rule-condition {
         position: relative;
         .rule-condition {
-          max-width: 500px;
-          .control-group {
+          .AknFieldContainer {
             margin: 0;
             .controls {
               .icons-container {
@@ -55,11 +139,19 @@
           }
         }
         .condition-field-values-container {
+          width: 100%;
+          .condition-field-values-value {
+            .AknFieldContainer-header {
+              display: none;
+            }
+          }
           .remove-value.btn {
             display: none;
           }
           .add-value.btn {
             display: none;
+            margin-top: 10px;
+            cursor: pointer;
           }
           .condition-field-values-value {
             margin-bottom: 0;
@@ -72,6 +164,11 @@
               height: 33px;
               float: left;
             }
+          }
+        }
+        &.rule-condition-type-between, &.rule-condition-type-not_between {
+          .condition-field-values-value {
+            margin-top: 5px;
           }
         }
         .remove {
@@ -96,10 +193,11 @@
         &.is_localizable {
           .condition-field-locale {
             display: inline-block;
+            width: 100%;
             .select2-container {
               border: none;
               .select2-choice {
-                border: 1px solid #ddd;
+                border: 1px solid @border-white-medium;
               }
             }
           }
@@ -107,20 +205,27 @@
         &.is_scopable {
           .condition-field-scope {
             display: inline-block;
+            width: 100%;
             .select2-container {
               border: none;
               .select2-choice {
-                border: 1px solid #ddd;
+                border: 1px solid @border-white-medium;
               }
             }
           }
         }
-        &.rule-condition-type-in, &.rule-condition-type-not_in, .rule-condition-type-between, .rule-condition-type-not_between {
+        &.rule-condition-type-in, &.rule-condition-type-not_in {
           .condition-field-values-container {
-            .controls {
-            }
-            .remove-value.btn {
-              display: inline-block;
+            .condition-field-values-value {
+              .AknFieldContainer-inputContainer {
+                padding-right: 30px;
+              }
+              .AknFieldContainer-header {
+                display: block;
+              }
+              .remove-value.btn {
+                display: inline-block;
+              }
             }
             .add-value.btn {
               display: inline-block;
@@ -139,16 +244,17 @@
         }
       }
     }
-    .control-group.rule-action-container {
+    .AknFieldContainer.rule-action-container {
       float: left;
       margin-top: 20px;
       padding-top: 0;
+      width: 100%;
       > .controls {
         > .rule-action-container {
-          > .control-group.rule-action {
+          > .AknFieldContainer.rule-action {
             min-height: 500px;
             padding: 5px;
-            border: 1px solid #e6e8ec;
+            border: 1px solid @border-white-light;
           }
         }
       }
@@ -159,7 +265,6 @@
       .rule-action {
         position: relative;
         .rule-action {
-          max-width: 500px;
           .action-field-values-container {
             display: none;
             .remove-value.btn {
@@ -181,7 +286,7 @@
               }
             }
           }
-          .control-group {
+          .AknFieldContainer {
             margin: 0;
             .controls {
               .icons-container {
@@ -213,15 +318,17 @@
         &.is_metric {
           .action-field-unit {
             display: inline-block;
+            width: 100%;
           }
         }
         &.is_localizable {
           .action-field-locale {
             display: inline-block;
+            width: 100%;
             .select2-container {
               border: none;
               .select2-choice {
-                border: 1px solid #ddd;
+                border: 1px solid @border-white-medium;
               }
             }
           }
@@ -229,25 +336,41 @@
         &.is_scopable {
           .action-field-scope {
             display: inline-block;
+            width: 100%;
             .select2-container {
               border: none;
               .select2-choice {
-                border: 1px solid #ddd;
+                border: 1px solid @border-white-medium;
               }
             }
           }
         }
         &.rule-action-type-add {
-          .action-from-field, .action-from-field-locale, .action-from-field-scope, .action-to-field, .action-to-field-locale, .action-to-field-scope {
+          .action-from-field,
+          .action-from-field-locale,
+          .action-from-field-scope,
+          .action-to-field,
+          .action-to-field-locale,
+          .action-to-field-scope {
             display: none;
           }
           .action-field-values-container {
             display: inline-block;
-            .remove-value.btn {
-              display: inline-block;
+            .action-field-values-value {
+              .AknFieldContainer-header {
+                display: block;
+              }
+              .AknFieldContainer-inputContainer {
+                padding-right: 30px;
+              }
+              .remove-value.btn {
+                display: inline-block;
+              }
             }
             .add-value.btn {
+              margin-top: 10px;
               display: inline-block;
+              cursor: pointer;
             }
           }
           .action-value {
@@ -255,7 +378,12 @@
           }
         }
         &.rule-action-type-set {
-          .action-from-field, .action-from-field-locale, .action-from-field-scope, .action-to-field, .action-to-field-locale, .action-to-field-scope {
+          .action-from-field,
+          .action-from-field-locale,
+          .action-from-field-scope,
+          .action-to-field,
+          .action-to-field-locale,
+          .action-to-field-scope {
             display: none;
           }
         }
@@ -266,26 +394,36 @@
           &.from_is_localizable {
             .action-from-field-locale {
               display: inline-block;
+              width: 100%;
             }
           }
           &.from_is_scopable {
             .action-from-field-scope {
               display: inline-block;
+              width: 100%;
             }
           }
           &.to_is_localizable {
             .action-to-field-locale {
               display: inline-block;
+              width: 100%;
             }
           }
           &.to_is_scopable {
             .action-to-field-scope {
               display: inline-block;
+              width: 100%;
             }
           }
         }
         &.rule-action-type-remove {
-          .action-to-field-value, .action-from-field, .action-from-field-locale, .action-from-field-scope, .action-to-field, .action-to-field-locale, .action-to-field-scope {
+          .action-to-field-value,
+          .action-from-field,
+          .action-from-field-locale,
+          .action-from-field-scope,
+          .action-to-field,
+          .action-to-field-locale,
+          .action-to-field-scope {
             display: none;
           }
         }

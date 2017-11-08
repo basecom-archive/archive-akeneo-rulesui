@@ -1,0 +1,11 @@
+extensions:
+    pim-rule-index-create-button:
+        module: pim/common/redirect
+        parent: pim-rule-index
+        targetZone: buttons
+        position: 50
+        aclResourceId: pimee_catalog_rule_rule_delete_permissions
+        config:
+            label: basecom.rules_engine.menu_entry
+            route: basecom_rule_create
+            buttonClass: AknButton AknButton--apply create-new-rule
