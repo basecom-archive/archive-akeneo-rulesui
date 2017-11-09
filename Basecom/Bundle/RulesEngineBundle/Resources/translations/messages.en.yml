@@ -1,11 +1,19 @@
-basecom.rules_engine.menu_entry: 'Add Rule'
-basecom.rules_engine.edit: 'Edit rule'
-basecom.flash.rule.removed: 'rule successfully removed'
-basecom.flash.rule.saved: 'rule saved'
-basecom.flash.rule.error.save: 'could not save rule'
-basecom.flash.rule.error.copy: 'it is not allowed to copy from / to the same field'
-btn.create.rule: 'Add new rule'
-btn.create.add-another-action: 'Add new action'
-btn.create.add-another-condition: 'Add new condition'
-page_title.basecom_rule_edit: 'edit Rule'
-page_title.basecom_rule_create: 'create Rule'
+basecom:
+  rules_engine:
+    menu_entry: 'Add Rule'
+    edit: 'Edit rule'
+  flash:
+    rule:
+      removed: 'rule successfully removed'
+      saved: 'rule saved'
+      error:
+        save: 'could not save rule'
+        copy: 'it is not allowed to copy from / to the same field'
+btn:
+  create:
+    rule: 'Add new rule'
+    add-another-action: 'Add new action'
+    add-another-condition: 'Add new condition'
+page_title:
+  basecom_rule_edit: 'edit Rule'
+  basecom_rule_create: 'create Rule'

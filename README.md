@@ -35,6 +35,7 @@ Clear you cache:
     bin/console cache:clear --no-warmup --env=prod
     bin/console pim:install:assets --env=prod
     bin/console cache:warmup --env=prod
+    yarn run webpack
 ```
 
 
