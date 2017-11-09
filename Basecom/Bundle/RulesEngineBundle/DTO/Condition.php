@@ -40,7 +40,7 @@ class Condition
     ];
 
     /**
-     * @var Attribute
+     * @var Attribute|string
      */
     public $field;
 
@@ -74,26 +74,28 @@ class Condition
      */
     public function getData(): array
     {
-        $data['field'] = $this->field->getCode();
+        $data['field'] = $this->field instanceof Attribute ? $this->field->getCode() : $this->field;
 
         if (array_key_exists($this->operator, self::OPERATORS)) {
             $data['operator'] = self::OPERATORS[$this->operator];
         }
 
-        if ($this->field->isScopable()) {
-            if ('' !== $this->scope) {
-                $data['scope'] = $this->scope;
-            }
+        if ('' !== $this->scope && (!$this->field instanceof Attribute || $this->field->isScopable())) {
+            $data['scope'] = $this->scope;
         }
-        if ($this->field->isLocalizable()) {
-            if ('' !== $this->locale) {
-                $data['locale'] = $this->locale;
-            }
+        if ('' !== $this->locale && (!$this->field instanceof Attribute || $this->field->isLocalizable())) {
+            $data['locale'] = $this->locale;
         }
 
         $data['value'] = reset($this->values);
 
-        if (null !== $this->field->getMetricFamily() && 0 < strlen($this->field->getMetricFamily())) {
+        if ($this->field instanceof Attribute) {
+            if (null !== $this->field->getMetricFamily() && 0 < strlen($this->field->getMetricFamily())) {
+                $data['value']           = [];
+                $data['value']['amount'] = reset($this->values);
+                $data['value']['unit']   = $this->unit;
+            }
+        } elseif (null !== $this->unit && 0 < strlen($this->unit) && 1 === count($this->values)) {
             $data['value']           = [];
             $data['value']['amount'] = reset($this->values);
             $data['value']['unit']   = $this->unit;

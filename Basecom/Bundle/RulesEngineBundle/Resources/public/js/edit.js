@@ -55,7 +55,6 @@ define(
                 });
 
                 function addValueEvents (container, type) {
-
                     var removeButton = $(container).find('.remove');
                     removeButton.unbind('click');
                     removeButton.on('click', function () {
@@ -296,7 +295,7 @@ define(
                             ruleDefinitionItem.addClass(type + '_is_scopable');
                         } else {
                             ruleDefinitionItem.removeClass(type + '_is_scopable');
-                            selectField = $(ruleDefinitionItem).find('.action-' + type + '-field-locale select');
+                            selectField = $(ruleDefinitionItem).find('.action-' + type + '-field-scope select');
                             $(selectField).select2("val", "");
                         }
                     }

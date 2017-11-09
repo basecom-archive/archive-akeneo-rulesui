@@ -240,26 +240,27 @@ class ConditionType extends AbstractType
     protected function getFieldCodes(): array
     {
         $attributes = $this->attributeRepository->findAll();
-        $newArray   = [];
+        $fieldCodes = [];
 
         /** @var Attribute $attribute */
         foreach ($attributes as $attribute) {
-            if ($attribute->getAttributeType() === 'pim_catalog_simpleselect' || $attribute->getAttributeType() === 'pim_catalog_multiselect') {
-                $newArray[$attribute->getCode().'.code'] = $attribute->getCode().'.code';
-            } else {
-                $newArray[$attribute->getCode()] = $attribute->getCode();
-            }
+            $fieldCodes[$attribute->getCode()] = $attribute->getCode();
         }
 
-        $newArray['enabled']         = 'enabled';
-        $newArray['completeness']    = 'completeness';
-        $newArray['updated']         = 'updated';
-        $newArray['created']         = 'created';
-        $newArray['groups.code']     = 'groups.code';
-        $newArray['family.code']     = 'family.code';
-        $newArray['categories.code'] = 'categories.code';
+        return array_merge($fieldCodes, self::getAdditionalFieldCodes());
+    }
 
-        return $newArray;
+    public static function getAdditionalFieldCodes(): array
+    {
+        return [
+            'enabled'      => 'enabled',
+            'completeness' => 'completeness',
+            'updated'      => 'updated',
+            'created'      => 'created',
+            'groups'       => 'groups',
+            'family'       => 'family',
+            'categories'   => 'categories',
+        ];
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\Form\DataTransformer;
 
+use Basecom\Bundle\RulesEngineBundle\Form\Type\ConditionType;
 use Pim\Bundle\CatalogBundle\Entity\Attribute;
 use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -50,7 +51,7 @@ class AttributeCodeToAttributeTransformer implements DataTransformerInterface
      *
      * @throws TransformationFailedException if object (Attribute) is not found
      *
-     * @return Attribute|null
+     * @return Attribute|string|null
      */
     public function reverseTransform($attributeCode)
     {
@@ -59,6 +60,10 @@ class AttributeCodeToAttributeTransformer implements DataTransformerInterface
         }
 
         if ($attributeCode instanceof Attribute) {
+            return $attributeCode;
+        }
+
+        if (in_array($attributeCode, ConditionType::getAdditionalFieldCodes(), true)) {
             return $attributeCode;
         }
 
