@@ -38,12 +38,12 @@ class RuleController extends Controller
     /**
      * @var RuleDefinitionSaver
      */
-    private $ruleDefinitionSaver;
+    protected $ruleDefinitionSaver;
 
     /**
      * @var ValidatorInterface
      */
-    private $validator;
+    protected $validator;
 
     /**
      * @var DenormalizerInterface
