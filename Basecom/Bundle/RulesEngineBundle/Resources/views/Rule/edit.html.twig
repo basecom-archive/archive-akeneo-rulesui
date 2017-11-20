@@ -1,19 +1,13 @@
-{% extends 'PimEnrichBundle::layout.html.twig' %}
-
+{% form_theme form 'BasecomRulesEngine::form_themes.html.twig' %}
 {% block content %}
-    <div class="basecom-rule">
-        {{ JSFV(form) }}
+    {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    <div class="AknDefault-mainContent basecom-rule">
         {% set action = path('basecom_rule_create') %}
+        {% if ruleDefinition.id is not null %}
+            {% set action = path('basecom_rule_edit', {id: ruleDefinition.id}) %}
+        {% endif %}
         {% if ruleDefinition.id is defined and ruleDefinition.id is not null %}
             {% set action = path('basecom_rule_edit', {'id': ruleDefinition.id}) %}
-        {% endif %}
-
-        {% if error is defined %}
-            <div class="alert alert-danger rule-engine-error" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                {{ error }}
-            </div>
         {% endif %}
         {{ form_start(form, {
             'action': action,
@@ -22,406 +16,82 @@
                 'data-updated-message': 'confirmation.discard changes'|trans({ '%entity%': 'family.title'|trans })
             }
         }) }}
-        {% set title = 'basecom.rules_engine.edit'|trans ~ ' - ' ~ form.vars.name %}
-
-        {% set titleButtons %}
-            {{ elements.backLink(path('pimee_catalog_rule_rule_index')) }}
-        {% endset %}
-
         {% set buttons %}
+            {{ elements.createBtn('basecom-logo', null, {'id' : 'basecom-logo'}) }}
             {% if ruleDefinition.id is defined and ruleDefinition.id is not null %}
                 {{ elements.deleteLink(
                 path('pimee_catalog_rule_rule_delete', { id: ruleDefinition.id }),
                 'pim_enrich_attribute_remove',
                 path('pimee_catalog_rule_rule_index'),
                 'confirmation.remove.item'|trans({ '%name%': form.vars.name }),
-                'basecom.flash.rule.removed'|trans
+                'basecom.flash.rule.removed'|trans,
+                null,
+                'AknButton AknButton--important'
                 ) }}
             {% endif %}
-            {{ elements.createBtn('basecom-logo', null,{'id' : 'basecom-logo'}) }}
             {{ elements.submitBtn('', 'ok') }}
-            {{ elements.createBtn('add-another-condition', null,{'id' : 'create-add-another-condition'}) }}
-            {{ elements.createBtn('add-another-action', null,{'id' : 'create-add-another-action'}) }}
-
         {% endset %}
 
-        {{ elements.page_header(title, buttons, null, null, null, titleButtons) }}
-        <div class="row-fluid tab-content">
+        {% if ruleDefinition.id is defined and ruleDefinition.id is not null %}
+            {{ elements.page_header({'title': 'basecom.rules_engine.edit'|trans, 'buttons': buttons}) }}
+        {% else %}
+            {{ elements.page_header({'title': 'basecom.rules_engine.menu_entry'|trans, 'buttons': buttons}) }}
+        {% endif %}
 
-            <div class="tab-pane tab-property active" id="pim_enrich-channel-tab-property">
-                <div class="tabsections">
-                    <div class="tabsection">
-                        <div class="tabsection-title">General properties</div>
-                        <div class="tabsection-content ">
-                            {{ form_widget(form) }}
-                        </div>
-                    </div>
+        <div class="AknTabContainer-content" id="pim_enrich-channel-tab-property">
+
+            {% for formError in form.vars.errors %}
+                <div class="AknFlash AknFlash-FormError AknFlash--error">
+                    {{ formError.message }}
                 </div>
+            {% endfor %}
 
-            </div>
-            <div class="tab-pane tab-property " id="pimee_enrich-channel-tab-asset_transformation">
-                <div class="no-data">No transformation found</div>
+            {{ form_row(form.code) }}
+            {{ form_row(form.priority) }}
+            {{ form_row(form.type) }}
+            <div class="AknColumnConfigurator">
+                <div class="AknColumnConfigurator-column">
+                    {{ form_row(form.conditions) }}
+                </div>
+                <div class="AknColumnConfigurator-column">
+                    {{ form_row(form.actions) }}
+                </div>
             </div>
         </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}
-
-{% block head_script_component %}
-    {{ parent() }}
-
-    <script type="text/javascript">
-        require(
-            ['jquery', 'bootstrap'],
-            function ($) {
-                'use strict';
-                $(function () {
-                    $(document).ajaxComplete(function () {
-                        if ($('.basecom-rule').length) {
-                            init();
-                            $('.basecom-rule select').select2();
-                            $('.basecom-rule select').trigger('change');
-                            $('#select2-drop-mask').hide();
-                        }
-                    });
-
-                    function init () {
-                        var actionContainers    = $('.control-group.rule-action');
-                        var conditionContainers = $('.control-group.rule-condition');
-
-                        var actionCounter    = actionContainers.length;
-                        var conditionCounter = conditionContainers.length;
-
-                        function addRemoveEvents () {
-                            var actionContainers    = $('.control-group.rule-action');
-                            var conditionContainers = $('.control-group.rule-condition');
-
-                            actionContainers.find('.remove').remove();
-                            conditionContainers.find('.remove').remove();
-
-                            actionContainers.append('<div class="remove btn icons-holder-text no-hash btn-delete"><i class="icon-trash"></i>Delete Action</div>');
-                            conditionContainers.append('<div class="remove btn icons-holder-text no-hash btn-delete" ><i class="icon-trash"></i>Delete Condition</div>');
-
-                            conditionContainers.each(function (index, conditionContainer) {
-                                var removeButton = $(conditionContainer).find('.remove');
-                                removeButton.unbind('click');
-                                removeButton.on('click', function () {
-                                    var conditionContainer = removeButton.closest('.control-group.rule-condition');
-                                    conditionContainer.remove();
-                                });
-                            });
-
-                            actionContainers.each(function (index, actionContainer) {
-                                var removeButton = $(actionContainer).find('.remove');
-                                removeButton.unbind('click');
-                                removeButton.on('click', function () {
-                                    var actionContainer = removeButton.closest('.control-group.rule-action');
-                                    actionContainer.remove();
-                                });
-                            });
-                        }
-
-                        conditionContainers.each(function (index, conditionContainer) {
-                            addValueEvents(conditionContainer, 'condition');
-                        });
-                        actionContainers.each(function (index, actionContainer) {
-                            addValueEvents(actionContainer, 'action');
-                        });
-
-                        function addValueEvents (container, type) {
-
-                            var removeButton = $(container).find('.remove');
-                            removeButton.unbind('click');
-                            removeButton.on('click', function () {
-                                var conditionContainer = removeButton.closest('.control-group.rule-' + type);
-                                conditionContainer.remove();
-                            });
-
-                            var valueContainer = $(container).find('.control-group.' + type + '-field-values-container');
-                            var values         = valueContainer.find('.control-group.' + type + '-field-values-value');
-
-                            valueContainer.find('.add-value.btn').remove();
-                            valueContainer.append('<div class="add-value btn"><i class="icon-plus"></i>Add Value</div>');
-
-                            values.each(function (index, value) {
-                                handleNewValue(value, type);
-                            });
-
-                            var addButton  = $(container).find('.btn.add-value');
-                            valueContainer = addButton.parent().find('.' + type + '-field-values-container');
-
-                            addInitialValue(valueContainer, type);
-
-                            addButton.unbind('click');
-                            addButton.on('click', function (event) {
-                                var addButton      = $(event.target);
-                                var valueContainer = addButton.parent().find('.' + type + '-field-values-container');
-                                var values         = valueContainer.find('.control-group.' + type + '-field-values-value');
-                                var prototype      = valueContainer.attr('data-prototype');
-                                var newValue       = $(prototype.replace(/__name__/g, values.length));
-                                valueContainer.append(newValue);
-                                handleNewValue(newValue, type);
-                            });
-                        }
-
-                        function handleNewValue (valueContainer, type) {
-                            var removeButtons = $(valueContainer).find('.btn.remove-value');
-
-                            if (0 < removeButtons.length) {
-                                return;
-                            }
-
-                            $(valueContainer).append('<div class="remove-value btn"><i class="icon-trash"></i></div>');
-
-                            removeButtons = $(valueContainer).find('.btn.remove-value');
-                            removeButtons.unbind('click');
-                            removeButtons.on('click', function (event) {
-                                var removeButton   = $(event.target);
-                                var valueContainer = removeButton.closest('.control-group.' + type + '-field-values-value');
-                                valueContainer.remove();
-                            });
-                        }
-
-                        addRemoveEvents();
-
-                        $('#create-add-another-condition').unbind('click');
-                        $('#create-add-another-condition').click(function (e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            var conditionList = $('#basecom_rule_conditions');
-
-                            var newWidget = conditionList.attr('data-prototype');
-                            newWidget     = newWidget.replace(/__name__/g, conditionCounter);
-                            newWidget     = newWidget.replace(/label__/g, '');
-                            var newLi     = $(newWidget);
-                            conditionCounter++;
-                            newLi.appendTo(conditionList);
-
-                            addDefinitionItemEventListeners();
-                            addRemoveEvents();
-                            addValueEvents(newLi, 'condition');
-                            $('select').select2();
-                        });
-                        $('#create-add-another-action').unbind('click');
-                        $('#create-add-another-action').click(function (e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            var conditionList = $('#basecom_rule_actions');
-
-                            var newWidget = conditionList.attr('data-prototype');
-                            newWidget     = newWidget.replace(/__name__/g, actionCounter);
-                            newWidget     = newWidget.replace(/label__/g, '');
-                            var newLi     = $(newWidget);
-                            actionCounter++;
-                            newLi.appendTo(conditionList);
-
-                            addDefinitionItemEventListeners();
-                            addRemoveEvents();
-                            $('select').select2();
-                        });
-
-                        $('.group').unbind('click');
-                        $('.group').click(function () {
-                            $(this).parent().find('tr:not(.group)').toggle();
-                            $(this).find('i').toggleClass('icon-expand-alt icon-collapse-alt');
-                        });
-
-                        {% if resource_granted('pim_enrich_family_edit_attributes') %}
-                        $('.attribute-requirement:not(.identifier) i').unbind('click');
-                        $('.attribute-requirement:not(.identifier) i').on('click', function () {
-                            $(this).toggleClass('icon-ok required').toggleClass('icon-circle non-required');
-
-                            var $input  = $(this).siblings('input[type="checkbox"]').eq(0);
-                            var checked = $input.is(':checked');
-                            $(this).attr('data-original-title', $(this).parent().data((checked ? 'not-' : '') + 'required-title')).tooltip('show');
-                            $input.prop('checked', !checked).trigger('change');
-                        });
-                        {% endif %}
-
-                        function addInitialValue (valueContainer, type) {
-                            var values = valueContainer.find('.control-group.' + type + '-field-values-value');
-
-                            if (0 >= values.length) {
-                                var prototype = valueContainer.attr('data-prototype');
-                                var newValue  = $(prototype.replace(/__name__/g, values.length));
-                                valueContainer.append(newValue);
-                                handleNewValue(newValue, type);
-                            }
-                        }
-
-                        function addDefinitionItemEventListeners () {
-                            function handleTypeSelection (select, ruleType) {
-                                select                 = $(select);
-                                var selectedType       = select.val();
-                                var ruleDefinitionItem = select.closest('.rule-' + ruleType);
-
-                                select.children('option').each(function (index, option) {
-                                    var type = $(option).attr('value');
-                                    ruleDefinitionItem.removeClass('rule-' + ruleType + '-type-' + type);
-                                });
-
-                                ruleDefinitionItem.addClass('rule-' + ruleType + '-type-' + selectedType);
-                                var valueContainer = select.closest('.rule-' + ruleType).find('.' + ruleType + '-field-values-container:not(.control-group)');
-
-                                if (ruleType === 'condition') {
-                                    var isMultiOption = false;
-
-                                    if (selectedType === "in" || selectedType === "not_in" || selectedType === "between" || selectedType === "not_between") {
-                                        isMultiOption = true;
-                                    }
-
-                                    var values = valueContainer.find('.control-group.condition-field-values-value');
-                                    if (0 === values.length || (1 < values.length && !isMultiOption)) {
-                                        values.remove();
-                                        addInitialValue(valueContainer, ruleType);
-                                    }
-                                }
-                                if (ruleType === 'action') {
-                                    var isMultiOption = false;
-
-                                    if (selectedType === "add") {
-                                        isMultiOption = true;
-                                    }
-
-                                    var values = valueContainer.find('.control-group.action-field-values-value');
-                                    if (0 === values.length || (1 < values.length && !isMultiOption)) {
-                                        values.remove();
-                                        addInitialValue(valueContainer, ruleType);
-                                    }
-                                }
-                            }
-
-                            $('select.condition-type-select').each(function (index, select) {
-                                handleTypeSelection(select, 'condition');
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleTypeSelection(select, 'condition');
-                                });
-                            });
-
-                            $('select.action-type-select').each(function (index, select) {
-                                handleTypeSelection(select, 'action');
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleTypeSelection(select, 'action');
-                                });
-                            });
-
-                            var attributesMap = {{ attributesData|json_encode|raw }};
-
-                            $('select.condition-field').each(function (index, select) {
-                                handleFieldSelection(select, 'condition');
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleFieldSelection(select, 'condition');
-                                });
-                            });
-                            $('select.action-field').each(function (index, select) {
-                                handleFieldSelection(select, 'action');
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleFieldSelection(select, 'action');
-                                });
-                            });
-                            $('select.action-from-field').each(function (index, select) {
-                                handleCopyFieldSelection(select);
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleCopyFieldSelection(select, 'from');
-                                });
-                            });
-                            $('select.action-to-field').each(function (index, select) {
-                                handleCopyFieldSelection(select);
-                                $(select).unbind('change');
-                                $(select).on('change', function () {
-                                    handleCopyFieldSelection(select, 'to');
-                                });
-                            });
-                            function handleCopyFieldSelection (select, type) {
-                                select            = $(select);
-                                var selectedField = select.val();
-
-                                if (!attributesMap.hasOwnProperty(selectedField)) {
-                                    return;
-                                }
-
-                                var attributeData      = attributesMap[selectedField];
-                                var ruleDefinitionItem = select.closest('.rule-action');
-
-                                if (attributeData.is_localizable) {
-                                    ruleDefinitionItem.addClass(type + '_is_localizable');
-                                } else {
-                                    ruleDefinitionItem.removeClass(type + '_is_localizable');
-                                    var selectField = $(ruleDefinitionItem).find('.action-' + type + '-field-locale select');
-                                    $(selectField).select2("val", "");
-                                }
-                                if (attributeData.is_scopable) {
-                                    ruleDefinitionItem.addClass(type + '_is_scopable');
-                                } else {
-                                    ruleDefinitionItem.removeClass(type + '_is_scopable');
-                                    var selectField = $(ruleDefinitionItem).find('.action-' + type + '-field-locale select');
-                                    $(selectField).select2("val", "");
-                                }
-                            }
-
-                            function handleFieldSelection (select, ruleType) {
-                                select            = $(select);
-                                var selectedField = select.val();
-
-                                var ruleDefinitionItem = select.closest('.rule-' + ruleType);
-
-                                if (selectedField === 'completeness') {
-                                    ruleDefinitionItem.addClass('is_localizable');
-                                    ruleDefinitionItem.addClass('is_scopable');
-                                } else if (attributesMap.hasOwnProperty(selectedField)) {
-
-                                    var attributeData = attributesMap[selectedField];
-
-                                    if (attributeData.is_localizable) {
-                                        ruleDefinitionItem.addClass('is_localizable');
-                                    } else {
-                                        ruleDefinitionItem.removeClass('is_localizable');
-                                        var selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-locale select');
-                                        $(selectField).select2("val", "");
-                                    }
-                                    if (attributeData.is_scopable) {
-                                        ruleDefinitionItem.addClass('is_scopable');
-                                    } else {
-                                        ruleDefinitionItem.removeClass('is_scopable');
-                                        var selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-scope select');
-                                        $(selectField).select2("val", "");
-                                    }
-                                    if (attributeData.is_metric) {
-                                        ruleDefinitionItem.addClass('is_metric');
-                                    } else {
-                                        ruleDefinitionItem.removeClass('is_metric');
-                                        var selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-unit input');
-                                        $(selectField).val('');
-                                    }
-                                } else {
-                                    ruleDefinitionItem.removeClass('is_localizable');
-                                    ruleDefinitionItem.removeClass('is_metric');
-                                    ruleDefinitionItem.removeClass('is_scopable');
-
-                                    var selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-locale select');
-                                    $(selectField).select2("val", "");
-                                    selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-unit input');
-                                    $(selectField).val('');
-                                    selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-scope select');
-                                    $(selectField).select2("val", "");
-                                }
-                            }
-                        }
-
-                        addDefinitionItemEventListeners();
-                        addRemoveEvents();
+{% set messages = [] %}
+{% for type,items in app.session.flashbag.all %}
+    {% set typeMessages = [] %}
+    {% for index,item in items %}
+        {% set typeMessages = typeMessages|merge({ (index): item|trans }) %}
+    {% endfor %}
+    {% set messages = messages|merge({ (type): typeMessages }) %}
+{% endfor %}
+<script>window.flashMessages = JSON.parse('{{ messages|json_encode()|raw }}');</script>
+<script type="text/javascript">
+    require(
+        [
+            'jquery',
+            'bsc-rules/editview',
+            'pim/common/breadcrumbs',
+            'pim/fetcher-registry'
+        ],
+        function ($, EditView, Breadcrumbs, FetcherRegistry) {
+            $(function () {
+                var breadcrumbs = new Breadcrumbs({
+                    config: {
+                        tab:  'pim-menu-settings',
+                        item: 'pim-menu-enrich-rule'
                     }
-
-                    init();
                 });
-            }
-        );
-    </script>
-{% endblock %}
+
+                breadcrumbs.configure();
+                FetcherRegistry.initialize();
+
+                new EditView({{ attributesData | json_encode | raw }});
+            });
+        }
+    );
+</script>

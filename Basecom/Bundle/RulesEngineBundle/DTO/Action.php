@@ -2,10 +2,6 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\DTO;
 
-use Akeneo\Bundle\RuleEngineBundle\Model\ActionInterface;
-use Akeneo\Bundle\RuleEngineBundle\Model\RuleDefinition as BaseRuleDefinition;
-use PimEnterprise\Component\CatalogRule\Model\ProductCopyAction;
-
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
  */
@@ -79,55 +75,54 @@ class Action
     /**
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         $data = ['type' => $this->type];
 
         switch ($this->type) {
-
             case 'copy':
                 $data['from_field'] = $this->fromField;
                 $data['to_field']   = $this->toField;
-                if ('' != $this->fromLocale) {
+                if ('' !== $this->fromLocale) {
                     $data['from_locale'] = $this->fromLocale;
                 }
-                if ('' != $this->toLocale) {
+                if ('' !== $this->toLocale) {
                     $data['to_locale'] = $this->toLocale;
                 }
-                if ('' != $this->fromScope) {
+                if ('' !== $this->fromScope) {
                     $data['from_scope'] = $this->fromScope;
                 }
-                if ('' != $this->toScope) {
+                if ('' !== $this->toScope) {
                     $data['to_scope'] = $this->toScope;
                 }
                 break;
             case 'add':
                 $data['field'] = $this->field;
                 $data['items'] = $this->items;
-                if ('' != $this->locale) {
+                if ('' !== $this->locale) {
                     $data['locale'] = $this->locale;
                 }
-                if ('' != $this->scope) {
+                if ('' !== $this->scope) {
                     $data['scope'] = $this->scope;
                 }
                 break;
             case 'set':
                 $data['field'] = $this->field;
                 $data['value'] = $this->value;
-                if ('' != $this->locale) {
+                if ('' !== $this->locale) {
                     $data['locale'] = $this->locale;
                 }
-                if ('' != $this->scope) {
+                if ('' !== $this->scope) {
                     $data['scope'] = $this->scope;
                 }
                 break;
             case 'remove':
                 $data['field'] = $this->field;
                 $data['items'] = $this->items;
-                if ('' != $this->locale) {
+                if ('' !== $this->locale) {
                     $data['locale'] = $this->locale;
                 }
-                if ('' != $this->scope) {
+                if ('' !== $this->scope) {
                     $data['scope'] = $this->scope;
                 }
                 break;
@@ -137,11 +132,11 @@ class Action
     }
 
     /**
-     * @param $data
+     * @param array $data
      *
      * @return Action
      */
-    public static function fromData($data)
+    public static function fromData(array $data): self
     {
         $action       = new self();
         $action->type = $data['type'];

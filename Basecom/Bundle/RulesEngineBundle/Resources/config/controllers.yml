@@ -2,19 +2,16 @@
 parameters:
     basecom_rule_engine.controller.rule.class: Basecom\Bundle\RulesEngineBundle\Controller\RuleController
     pimee_catalog_rule.controller.rule.class: Basecom\Bundle\RulesEngineBundle\Controller\OverwriteRuleController
+
 services:
     basecom.controller.rule:
         scope: request
         class: '%basecom_rule_engine.controller.rule.class%'
         arguments:
-            - '@request'
             - '@router'
-            - '@basecom.form.rule'
             - '@akeneo_rule_engine.saver.rule_definition'
             - '@validator'
             - '@pimee_catalog_rule.denormalizer.product_rule.chained'
-            - '%akeneo_rule_engine.model.rule.class%'
-            - '%akeneo_rule_engine.model.rule_definition.class%'
             - '@form.factory'
             - '@akeneo_rule_engine.repository.rule_definition'
             - '@pim_catalog.repository.attribute'

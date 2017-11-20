@@ -10,6 +10,7 @@ services:
             - '%akeneo_rule_engine.model.rule_definition.class%'
         tags:
             - { name: form.type, alias: basecom_rule }
+
     basecom.form.type.condition:
         class: '%basecom.form.type.conditon.class%'
         arguments:
@@ -17,9 +18,10 @@ services:
             - '@pim_catalog.repository.locale'
             - '@pim_catalog.repository.channel'
             - '@pim_catalog.repository.attribute'
-            - { starts_with: 'STARTS WITH', ends_with: 'ENDS WITH', contains: 'CONTAINS', does_not_contain: 'DOES NOT CONTAIN',empty: 'EMPTY', not_empty: 'NOT EMPTY', equal: '=', not_equal: '!=', in: 'IN', not_in: 'NOT IN', unclassified: 'UNCLASSIFIED', in_or_unclassified: 'IN OR UNCLASSIFIED', in_children: 'IN CHILDREN', not_in_children: 'NOT IN CHILDREN', greater: '>', greater_or_equal: '>=', smaller: '<', smaller_or_equal: '<=', between: 'BETWEEN', not_between: 'NOT BETWEEN'}
+            - '@akeneo_measure.manager'
         tags:
             - { name: form.type, alias: basecom_rule_condition }
+
     basecom.form.type.action:
         class: '%basecom.form.type.action.class%'
         arguments:
@@ -29,10 +31,3 @@ services:
             - ['add', 'set', 'copy', 'remove']
         tags:
             - { name: form.type, alias: basecom_rule_action }
-    basecom.form.rule:
-        class:           Symfony\Component\Form\Form
-        factory_method:  createNamed
-        factory_service: form.factory
-        arguments:
-            - basecom_rule_form
-            - basecom_rule

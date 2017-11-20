@@ -1,7 +1,7 @@
 # Akeneo rules engine graphical interface
 ## Requirements
 
-Akeneo PIM Enterprise Edition 1.6.~
+Akeneo PIM Enterprise Edition 2.0.~
 
 ## Installation
 
@@ -32,10 +32,10 @@ Enable the route in the 'app/routing.yml' file
 Clear you cache:
 
 ```bash
-    php app/console cache:clear --env=prod
-    rm -rf app/cache/* ./web/bundles/* ./web/css/* ./web/js/*
-    app/console --env=prod pim:installer:assets
-    app/console --env=prod cache:warmup
+    bin/console cache:clear --no-warmup --env=prod
+    bin/console pim:install:assets --env=prod
+    bin/console cache:warmup --env=prod
+    yarn run webpack
 ```
 
 

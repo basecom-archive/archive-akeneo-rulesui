@@ -1,9 +1,6 @@
-{% extends 'PimEnrichBundle::layout.html.twig' %}
-
 {% import 'PimDataGridBundle::macros.html.twig' as dataGrid %}
 
 {% block content %}
-
     {% if resource_granted('pimee_catalog_rule_rule_execute_permissions') %}
         {% set buttons %}
             {{ elements.confirmLink(

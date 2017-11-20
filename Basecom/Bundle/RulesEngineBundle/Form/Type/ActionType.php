@@ -8,6 +8,9 @@ use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
 use Pim\Component\Catalog\Repository\ChannelRepositoryInterface;
 use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,26 +19,40 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ActionType extends AbstractType
 {
-    /** @var LocaleRepositoryInterface */
+    /**
+     * @var LocaleRepositoryInterface
+     */
     protected $localeRepository;
 
-    /** @var ChannelRepositoryInterface */
+    /**
+     * @var ChannelRepositoryInterface
+     */
     protected $channelRepository;
 
-    /** @var AttributeRepositoryInterface */
+    /**
+     * @var AttributeRepositoryInterface
+     */
     protected $attributeRepository;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $operators;
 
     /**
-     * @param        $localeRepository
-     * @param        $channelRepository
-     * @param        $attributeRepository
-     * @param array  $operators
+     * Constructor of ActionType.
+     *
+     * @param LocaleRepositoryInterface    $localeRepository
+     * @param ChannelRepositoryInterface   $channelRepository
+     * @param AttributeRepositoryInterface $attributeRepository
+     * @param array                        $operators
      */
-    public function __construct($localeRepository, $channelRepository, $attributeRepository, array $operators)
-    {
+    public function __construct(
+        LocaleRepositoryInterface $localeRepository,
+        ChannelRepositoryInterface $channelRepository,
+        AttributeRepositoryInterface $attributeRepository,
+        array $operators
+    ) {
         $this->localeRepository    = $localeRepository;
         $this->channelRepository   = $channelRepository;
         $this->attributeRepository = $attributeRepository;
@@ -57,19 +74,19 @@ class ActionType extends AbstractType
         $this->addToFieldScope($builder);
         $this->addFieldLocale($builder);
         $this->addFieldScope($builder);
-        $this->addFieldvalue($builder);
+        $this->addFieldValue($builder);
         $this->addFieldUnit($builder);
         $this->addFieldItems($builder);
     }
 
     /**
-     * Add field id to form builder
+     * Add field id to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addField(FormBuilderInterface $builder)
     {
-        $builder->add('field', 'choice', [
+        $builder->add('field', ChoiceType::class, [
             'choices'  => $this->getAttributesAsArray($this->attributeRepository->findAll()),
             'required' => false,
             'multiple' => false,
@@ -81,13 +98,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field id to form builder
+     * Add field id to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldValue(FormBuilderInterface $builder)
     {
-        $builder->add('value', 'text', [
+        $builder->add('value', TextType::class, [
             'required' => false,
             'attr'     => [
                 'class' => 'action-value',
@@ -96,13 +113,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field id to form builder
+     * Add field id to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFromFieldField(FormBuilderInterface $builder)
     {
-        $builder->add('fromField', 'choice', [
+        $builder->add('fromField', ChoiceType::class, [
             'choices'  => $this->getAttributesAsArray($this->attributeRepository->findAll()),
             'required' => false,
             'multiple' => false,
@@ -114,13 +131,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field locale to form builder
+     * Add field locale to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFromFieldLocale(FormBuilderInterface $builder)
     {
-        $builder->add('fromLocale', 'choice', [
+        $builder->add('fromLocale', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->localeRepository->getActivatedLocaleCodes()),
             'required' => false,
             'multiple' => false,
@@ -132,13 +149,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field locale to form builder
+     * Add field locale to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFromFieldScope(FormBuilderInterface $builder)
     {
-        $builder->add('fromScope', 'choice', [
+        $builder->add('fromScope', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->channelRepository->getChannelCodes()),
             'required' => false,
             'multiple' => false,
@@ -150,13 +167,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field id to form builder
+     * Add field id to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addToFieldField(FormBuilderInterface $builder)
     {
-        $builder->add('toField', 'choice', [
+        $builder->add('toField', ChoiceType::class, [
             'choices'  => $this->getAttributesAsArray($this->attributeRepository->findAll()),
             'required' => false,
             'multiple' => false,
@@ -168,13 +185,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field locale to form builder
+     * Add field locale to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addToFieldLocale(FormBuilderInterface $builder)
     {
-        $builder->add('toLocale', 'choice', [
+        $builder->add('toLocale', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->localeRepository->getActivatedLocaleCodes()),
             'required' => false,
             'multiple' => false,
@@ -186,13 +203,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field toScope to form builder
+     * Add field toScope to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addToFieldScope(FormBuilderInterface $builder)
     {
-        $builder->add('toScope', 'choice', [
+        $builder->add('toScope', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->channelRepository->getChannelCodes()),
             'required' => false,
             'multiple' => false,
@@ -204,13 +221,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field locale to form builder
+     * Add field locale to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldLocale(FormBuilderInterface $builder)
     {
-        $builder->add('locale', 'choice', [
+        $builder->add('locale', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->localeRepository->getActivatedLocaleCodes()),
             'required' => false,
             'multiple' => false,
@@ -222,13 +239,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field scope to form builder
+     * Add field scope to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldScope(FormBuilderInterface $builder)
     {
-        $builder->add('scope', 'choice', [
+        $builder->add('scope', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->channelRepository->getChannelCodes()),
             'required' => false,
             'multiple' => false,
@@ -240,13 +257,13 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field type to form builder
+     * Add field type to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldType(FormBuilderInterface $builder)
     {
-        $builder->add('type', 'choice', [
+        $builder->add('type', ChoiceType::class, [
             'choices'  => $this->getValuesAsArray($this->operators),
             'required' => true,
             'multiple' => false,
@@ -258,56 +275,57 @@ class ActionType extends AbstractType
     }
 
     /**
-     * Add field data to form builder
+     * Add field data to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldData(FormBuilderInterface $builder)
     {
-        $builder->add('valueData', 'text', [
+        $builder->add('valueData', TextType::class, [
             'label'    => 'Value',
             'required' => false,
             'attr'     => [
                 'class' => 'action-field-data',
             ],
         ]);
-
     }
 
     /**
-     * Add field unit to form builder
+     * Add field unit to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldUnit(FormBuilderInterface $builder)
     {
-        $builder->add('unit', 'text', [
+        $builder->add('unit', TextType::class, [
             'required' => false,
             'attr'     => [
                 'class' => 'action-field-unit',
             ],
         ]);
-
     }
 
     /**
-     * Add field value to form builder
+     * Add field value to form builder.
      *
      * @param FormBuilderInterface $builder
      */
     protected function addFieldItems(FormBuilderInterface $builder)
     {
-        $builder->add('items', 'collection', [
-                'type'         => 'text',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'required'     => false,
-                'label'        => 'Value',
-                'attr'         => [
+        $builder->add(
+            'items',
+            CollectionType::class,
+            [
+                'entry_type'    => TextType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'by_reference'  => false,
+                'required'      => false,
+                'label'         => 'Value',
+                'attr'          => [
                     'class' => 'action-field-values-container',
                 ],
-                'options'      => [
+                'entry_options' => [
                     'attr'     => [
                         'class' => 'action-field-values-value',
                     ],
@@ -323,7 +341,7 @@ class ActionType extends AbstractType
      *
      * @return array
      */
-    protected function getValuesAsArray($array)
+    protected function getValuesAsArray($array): array
     {
         $newArray = [];
         foreach ($array as $key => $value) {
@@ -338,7 +356,7 @@ class ActionType extends AbstractType
      *
      * @return array
      */
-    protected function getAttributesAsArray($attributes)
+    protected function getAttributesAsArray($attributes): array
     {
         $newArray = [];
 
@@ -368,7 +386,7 @@ class ActionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'basecom_rule_action';
     }

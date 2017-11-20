@@ -44,13 +44,9 @@ class RuleDefinition
      *
      * @return BaseRuleDefinition
      */
-    public function getEntity($createNew = false)
+    public function getEntity(bool $createNew = false): BaseRuleDefinition
     {
-        if (null === $this->entity) {
-            $createNew = true;
-        }
-
-        if ($createNew) {
+        if ($createNew || null === $this->entity) {
             return new BaseRuleDefinition();
         }
 
@@ -83,7 +79,7 @@ class RuleDefinition
      *
      * @return RuleDefinition
      */
-    public static function fromEntity(BaseRuleDefinition $entity)
+    public static function fromEntity(BaseRuleDefinition $entity): self
     {
         $definition           = new self();
         $definition->entity   = $entity;

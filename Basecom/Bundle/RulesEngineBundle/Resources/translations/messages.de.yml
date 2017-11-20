@@ -1,16 +1,23 @@
 basecom:
-    rules_engine:
-        menu_entry: Regel hinzufügen
-        edit: Regel bearbeiten
-    flash:
-        rule:
-            removed: Regel entfernt
-            saved: Regel gespeichert
-            error:
-                save: Regel konnte nicht gespeichert werden
-                copy: Das kopieren von 2 gleichen feldern ist nicht gestattet
+  rules_engine:
+    acl:
+      remove_permissions: 'Regel entfernen'
+      edit_permissions: 'Regel bearbeiten'
+      create_permissions: 'Regel erstellen'
+    menu_entry: 'Regel hinzufügen'
+    edit: 'Regel bearbeiten'
+  flash:
+    rule:
+      removed: 'Regel entfernt'
+      saved: 'Regel gespeichert'
+      error:
+        save: 'Regel konnte nicht gespeichert werden'
+        copy: 'Das kopieren von 2 gleichen feldern ist nicht gestattet'
 btn:
-    create:
-        rule: Neue Rule erstellen
-        add-another-action: Neue Action hinzufügen
-        add-another-condition: Neue Condition hinzufügen
+  create:
+    rule: 'Neue Rule erstellen'
+    add-another-action: 'Neue Action hinzufügen'
+    add-another-condition: 'Neue Condition hinzufügen'
+page_title:
+  basecom_rule_edit: 'Regel bearbeiten'
+  basecom_rule_create: 'neue Regel erstellen'

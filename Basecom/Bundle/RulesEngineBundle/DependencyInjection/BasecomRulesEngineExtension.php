@@ -4,9 +4,14 @@ namespace Basecom\Bundle\RulesEngineBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
+/**
+ * BasecomRulesEngineExtension.
+ *
+ * @author Peter van der Zwaag <vanderzwaag@basecom.de>
+ */
 class BasecomRulesEngineExtension extends Extension
 {
     /**
@@ -25,5 +30,6 @@ class BasecomRulesEngineExtension extends Extension
 
         $loader->load('form_types.yml');
         $loader->load('controllers.yml');
+        $loader->load('engine.yml');
     }
 }
