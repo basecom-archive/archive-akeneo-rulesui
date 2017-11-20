@@ -1,5 +1,9 @@
 basecom:
   rules_engine:
+    acl:
+      remove_permissions: 'Remove rule'
+      edit_permissions: 'Edit rule'
+      create_permissions: 'Create rule'
     menu_entry: 'Add Rule'
     edit: 'Edit rule'
   flash:

@@ -105,7 +105,7 @@ class RuleController extends Controller
     /**
      * Create rule.
      *
-     * @AclAncestor("pimee_catalog_rule_rule_delete_permissions")
+     * @AclAncestor("basecom_rule_create")
      *
      * @param Request $request
      *
@@ -121,7 +121,7 @@ class RuleController extends Controller
     /**
      * Edit rule.
      *
-     * @AclAncestor("pimee_catalog_rule_rule_delete_permissions")
+     * @AclAncestor("basecom_rule_edit")
      *
      * @param Request        $request
      * @param RuleDefinition $ruleDefinition

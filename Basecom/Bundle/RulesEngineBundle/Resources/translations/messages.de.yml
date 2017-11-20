@@ -1,5 +1,9 @@
 basecom:
   rules_engine:
+    acl:
+      remove_permissions: 'Regel entfernen'
+      edit_permissions: 'Regel bearbeiten'
+      create_permissions: 'Regel erstellen'
     menu_entry: 'Regel hinzufügen'
     edit: 'Regel bearbeiten'
   flash:

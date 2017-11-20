@@ -64,14 +64,14 @@ datagrid:
                 type: navigate
                 label: basecom.rule_engine.edit
                 link: edit_link
-                acl_resource:  pimee_catalog_rule_rule_delete_permissions
+                acl_resource:  basecom_rule_edit
             delete:
                 launcherOptions:
                     className: AknIconButton AknIconButton--small AknIconButton--trash
                 type: delete
                 label: pimee_catalog_rule.datagrid.rule-grid.actions.delete
                 link: delete_link
-                acl_resource:  pimee_catalog_rule_rule_delete_permissions
+                acl_resource:  basecom_rule_remove
         filters:
             columns:
                 code:

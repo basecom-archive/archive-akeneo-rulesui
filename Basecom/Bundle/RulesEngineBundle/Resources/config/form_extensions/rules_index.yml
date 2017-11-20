@@ -4,7 +4,7 @@ extensions:
         parent: pim-rule-index
         targetZone: buttons
         position: 50
-        aclResourceId: pimee_catalog_rule_rule_delete_permissions
+        aclResourceId: basecom_rule_create
         config:
             label: basecom.rules_engine.menu_entry
             route: basecom_rule_create

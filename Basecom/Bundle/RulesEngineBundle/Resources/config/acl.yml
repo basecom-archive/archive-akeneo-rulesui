@@ -1,0 +1,14 @@
+basecom_rule_remove:
+    type: action
+    label: basecom.rules_engine.acl.remove_permissions
+    group_name: pimee_catalog_rule.acl_group.rule
+
+basecom_rule_edit:
+    type: action
+    label: basecom.rules_engine.acl.edit_permissions
+    group_name: pimee_catalog_rule.acl_group.rule
+
+basecom_rule_create:
+    type: action
+    label: basecom.rules_engine.acl.create_permissions
+    group_name: pimee_catalog_rule.acl_group.rule
