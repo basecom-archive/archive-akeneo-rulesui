@@ -102,7 +102,7 @@ class Condition
         }
 
         if (in_array(strtoupper($this->operator), self::MULTIPLE_VALUE_OPERATORS, true)) {
-            $data['value'] = $this->values;
+            $data['value'] = array_values($this->values);
         }
 
         return $data;
