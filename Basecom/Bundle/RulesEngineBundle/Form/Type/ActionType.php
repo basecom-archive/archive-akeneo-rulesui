@@ -365,7 +365,7 @@ class ActionType extends AbstractType
             $newArray[$attribute->getCode()] = $attribute->getCode();
         }
         $newArray['group']    = 'group';
-        $newArray['category'] = 'category';
+        $newArray['categories'] = 'categories';
         $newArray['family']   = 'family';
 
         return $newArray;
