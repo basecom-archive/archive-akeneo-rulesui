@@ -212,11 +212,7 @@ define(
                             }
                         }
                         if (ruleType === 'action') {
-                            isMultiOption = false;
-
-                            if (selectedType === "add") {
-                                isMultiOption = true;
-                            }
+                            isMultiOption = selectedType === "add" || selectedType === "remove";
 
                             values = valueContainer.find('.AknFieldContainer.action-field-values-value');
 

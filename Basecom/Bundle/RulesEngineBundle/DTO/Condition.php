@@ -30,6 +30,8 @@ class Condition
         'greater_or_equal'   => '>=',
         'smaller'            => '<',
         'smaller_or_equal'   => '<=',
+        'at least complete'  => 'AT_LEAST_COMPLETE',
+        'at least incomplete'=> 'AT_LEAST_INCOMPLETE'
     ];
 
     const MULTIPLE_VALUE_OPERATORS = [
@@ -89,6 +91,10 @@ class Condition
 
         $data['value'] = reset($this->values);
 
+        if('enabled' === $this->field) {
+            $data['value'] = (bool) $data['value'];
+        }
+
         if ($this->field instanceof Attribute) {
             if (null !== $this->field->getMetricFamily() && 0 < strlen($this->field->getMetricFamily())) {
                 $data['value']           = [];
@@ -102,7 +108,7 @@ class Condition
         }
 
         if (in_array(strtoupper($this->operator), self::MULTIPLE_VALUE_OPERATORS, true)) {
-            $data['value'] = $this->values;
+            $data['value'] = array_values($this->values);
         }
 
         return $data;
