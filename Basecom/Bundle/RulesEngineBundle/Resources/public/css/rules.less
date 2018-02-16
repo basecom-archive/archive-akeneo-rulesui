@@ -21,7 +21,7 @@
   .btn.remove {
     cursor: pointer;
   }
-  
+
   .AknColumnConfigurator {
     padding: 0;
     margin-right: -24px;
@@ -341,7 +341,8 @@
             }
           }
         }
-        &.rule-action-type-add {
+        &.rule-action-type-add,
+        .rule-action-type-remove {
           .action-from-field,
           .action-from-field-locale,
           .action-from-field-scope,
@@ -410,17 +411,6 @@
               display: inline-block;
               width: 100%;
             }
-          }
-        }
-        &.rule-action-type-remove {
-          .action-to-field-value,
-          .action-from-field,
-          .action-from-field-locale,
-          .action-from-field-scope,
-          .action-to-field,
-          .action-to-field-locale,
-          .action-to-field-scope {
-            display: none;
           }
         }
       }
