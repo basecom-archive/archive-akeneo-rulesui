@@ -107,7 +107,7 @@ class Condition
             $data['value']['unit']   = $this->unit;
         }
 
-        if (in_array(strtoupper($this->operator), self::MULTIPLE_VALUE_OPERATORS, true)) {
+        if (array_key_exists($this->operator, self::MULTIPLE_VALUE_OPERATORS)) {
             $data['value'] = array_values($this->values);
         }
 
