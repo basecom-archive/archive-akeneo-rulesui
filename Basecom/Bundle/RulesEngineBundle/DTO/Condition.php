@@ -3,6 +3,7 @@
 namespace Basecom\Bundle\RulesEngineBundle\DTO;
 
 use Pim\Bundle\CatalogBundle\Entity\Attribute;
+use Pim\Component\Catalog\AttributeTypes;
 
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
@@ -91,7 +92,7 @@ class Condition
 
         $data['value'] = reset($this->values);
 
-        if('enabled' === $this->field) {
+        if('enabled' === $this->field || AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
             $data['value'] = (bool) $data['value'];
         }
 
