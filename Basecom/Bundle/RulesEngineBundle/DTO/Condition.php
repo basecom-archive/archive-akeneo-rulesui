@@ -92,7 +92,7 @@ class Condition
 
         $data['value'] = reset($this->values);
 
-        if('enabled' === $this->field || AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
+        if('enabled' === $this->field || $this->field instanceof Attribute && AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
             $data['value'] = (bool) $data['value'];
         }
 
