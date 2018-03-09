@@ -19,6 +19,7 @@ services:
             - '@pim_catalog.repository.channel'
             - '@pim_catalog.repository.attribute'
             - '@akeneo_measure.manager'
+            - '@pim_catalog.repository.currency'
         tags:
             - { name: form.type, alias: basecom_rule_condition }
 

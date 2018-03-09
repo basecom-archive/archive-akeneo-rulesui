@@ -73,6 +73,11 @@ class Condition
     public $unit;
 
     /**
+     * @var string
+     */
+    public $currency;
+
+    /**
      * @return array
      */
     public function getData(): array
@@ -92,8 +97,14 @@ class Condition
 
         $data['value'] = reset($this->values);
 
-        if('enabled' === $this->field || $this->field instanceof Attribute && AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
+        if('enabled' === $this->field) {
             $data['value'] = (bool) $data['value'];
+        }
+
+        if ('' !== $this->currency && $this->field instanceof Attribute && AttributeTypes::PRICE_COLLECTION === $this->field->getType()) {
+            $data['value']             = [];
+            $data['value']['currency'] = $this->currency;
+            $data['value']['amount']     = reset($this->values);
         }
 
         if ($this->field instanceof Attribute) {
@@ -131,9 +142,12 @@ class Condition
 
         if (array_key_exists('value', $data)) {
             if (is_array($data['value'])) {
-                if (array_key_exists('amount', $data['value'])) {
+                if (array_key_exists('unit', $data['value'])) {
                     $condition->values[] = $data['value']['amount'];
                     $condition->unit     = $data['value']['unit'];
+                } else if(array_key_exists('currency', $data['value'])) {
+                    $condition->values[] = $data['value']['amount'];
+                    $condition->currency = $data['value']['currency'];
                 } else {
                     $condition->values = $data['value'];
                 }

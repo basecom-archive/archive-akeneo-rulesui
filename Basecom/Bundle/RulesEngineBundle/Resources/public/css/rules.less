@@ -64,7 +64,8 @@
     float: right;
   }
   .AknFieldContainer {
-    &.condition-field-unit {
+    &.condition-field-unit,
+    &.condition-field-currency {
       width: 100%;
     }
   }
@@ -182,8 +183,16 @@
         .condition-field-unit {
           display: none;
         }
+        .condition-field-currency {
+          display: none;
+        }
         &.is_metric {
           .condition-field-unit {
+            display: inline-block;
+          }
+        }
+        &.is_price {
+          .condition-field-currency {
             display: inline-block;
           }
         }

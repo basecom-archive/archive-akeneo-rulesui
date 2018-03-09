@@ -10,6 +10,7 @@ use Basecom\Bundle\RulesEngineBundle\Engine\ProductRuleBuilder;
 use Basecom\Bundle\RulesEngineBundle\Form\Type\RuleDefinitionType;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Pim\Bundle\CatalogBundle\Entity\Attribute;
+use Pim\Component\Catalog\AttributeTypes;
 use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -142,6 +143,7 @@ class RuleController extends Controller
                 'is_localizable' => $attribute->isLocalizable(),
                 'is_scopable'    => $attribute->isScopable(),
                 'is_metric'      => $attribute->getMetricFamily() ? true : false,
+                'is_price'       => AttributeTypes::PRICE_COLLECTION === $attribute->getType() ? true : false
             ];
         }
 

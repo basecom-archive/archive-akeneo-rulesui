@@ -331,10 +331,18 @@ define(
                                 selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-unit input');
                                 $(selectField).val('');
                             }
+                            if (attributeData.is_price) {
+                                ruleDefinitionItem.addClass('is_price');
+                            } else {
+                                ruleDefinitionItem.removeClass('is_price');
+                                selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-unit input');
+                                $(selectField).val('');
+                            }
                         } else {
                             ruleDefinitionItem.removeClass('is_localizable');
                             ruleDefinitionItem.removeClass('is_metric');
                             ruleDefinitionItem.removeClass('is_scopable');
+                            ruleDefinitionItem.removeClass('is_price');
 
                             selectField = $(ruleDefinitionItem).find('.' + ruleType + '-field-locale select');
                             $(selectField).select2("val", "");

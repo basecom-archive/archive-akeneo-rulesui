@@ -8,6 +8,7 @@ use Basecom\Bundle\RulesEngineBundle\Form\DataTransformer\AttributeCodeToAttribu
 use Pim\Bundle\CatalogBundle\Entity\Attribute;
 use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
 use Pim\Component\Catalog\Repository\ChannelRepositoryInterface;
+use Pim\Component\Catalog\Repository\CurrencyRepositoryInterface;
 use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -47,6 +48,11 @@ class ConditionType extends AbstractType
     protected $measureManager;
 
     /**
+     * @var CurrencyRepositoryInterface
+     */
+    private $currencyRepository;
+
+    /**
      * Constructor of ConditionType.
      *
      * @param string                       $dataClass
@@ -54,19 +60,22 @@ class ConditionType extends AbstractType
      * @param ChannelRepositoryInterface   $channelRepository
      * @param AttributeRepositoryInterface $attributeRepository
      * @param MeasureManager               $measureManager
+     * @param CurrencyRepositoryInterface  $currencyRepository
      */
     public function __construct(
         string $dataClass,
         LocaleRepositoryInterface $localeRepository,
         ChannelRepositoryInterface $channelRepository,
         AttributeRepositoryInterface $attributeRepository,
-        MeasureManager $measureManager
+        MeasureManager $measureManager,
+        CurrencyRepositoryInterface $currencyRepository
     ) {
         $this->dataClass           = $dataClass;
         $this->localeRepository    = $localeRepository;
         $this->channelRepository   = $channelRepository;
         $this->attributeRepository = $attributeRepository;
         $this->measureManager      = $measureManager;
+        $this->currencyRepository = $currencyRepository;
     }
 
     /**
@@ -80,6 +89,7 @@ class ConditionType extends AbstractType
         $this->addFieldScope($builder);
         $this->addFieldValue($builder);
         $this->addFieldUnit($builder);
+        $this->addFieldCurrency($builder);
     }
 
     /**
@@ -233,6 +243,22 @@ class ConditionType extends AbstractType
     }
 
     /**
+     * @param FormBuilderInterface $builder
+     */
+    protected function addFieldCurrency(FormBuilderInterface $builder)
+    {
+        $builder->add('currency', ChoiceType::class, [
+            'choices'  => $this->getValuesAsArray($this->currencyRepository->getActivatedCurrencyCodes()),
+            'required' => false,
+            'multiple' => false,
+            'select2'  => true,
+            'attr'     => [
+                'class' => 'condition-field-currency',
+            ],
+        ]);
+    }
+
+    /**
      * Get all possible entries for field value.
      *
      * @return array
@@ -250,6 +276,9 @@ class ConditionType extends AbstractType
         return array_merge($fieldCodes, self::getAdditionalFieldCodes());
     }
 
+    /**
+     * @return array
+     */
     public static function getAdditionalFieldCodes(): array
     {
         return [
