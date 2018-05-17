@@ -36,10 +36,12 @@ class Condition
     ];
 
     const MULTIPLE_VALUE_OPERATORS = [
-        'between'     => 'BETWEEN',
-        'not_between' => 'NOT BETWEEN',
-        'in'          => 'IN',
-        'not_in'      => 'NOT IN',
+        'between'            => 'BETWEEN',
+        'not_between'        => 'NOT BETWEEN',
+        'in'                 => 'IN',
+        'not_in'             => 'NOT IN',
+        'in_or_unclassified' => 'IN OR UNCLASSIFIED',
+        'in_children'        => 'IN CHILDREN',
     ];
 
     /**
