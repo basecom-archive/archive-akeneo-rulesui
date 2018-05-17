@@ -7,15 +7,19 @@
   "authors": [
     {
       "name": "Peter van der Zwaag",
-      "email": "vanderzwaag@basecom.de"
+      "email": "p.vanderzwaag@basecom.de"
     },
     {
       "name": "Amir El Sayed",
-      "email": "elsayed@basecom.de"
+      "email": "a.elsayed@basecom.de"
     },
     {
       "name": "Justus Klein",
-      "email": "klein@basecom.de"
+      "email": "j.klein@basecom.de"
+    },
+    {
+      "name": "Christopher Steinke",
+      "email": "c.steinke@basecom.de"
     },
     {
       "name": "basecom GmbH & Co. KG",
@@ -24,7 +28,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "akeneo/pim-enterprise-dev": "2.2.*"
+    "akeneo/pim-enterprise-dev": "2.0.*"
   },
   "autoload": {
     "psr-0": {
