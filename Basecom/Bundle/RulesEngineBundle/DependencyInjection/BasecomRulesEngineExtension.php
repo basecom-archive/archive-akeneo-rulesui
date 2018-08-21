@@ -20,9 +20,9 @@ class BasecomRulesEngineExtension extends Extension
      * @param array            $config    An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
-     * @throws \InvalidArgumentException When provided tag is not defined in this extension
-     *
      * @api
+     *
+     * @throws \Exception
      */
     public function load(array $config, ContainerBuilder $container)
     {
@@ -30,6 +30,5 @@ class BasecomRulesEngineExtension extends Extension
 
         $loader->load('form_types.yml');
         $loader->load('controllers.yml');
-        $loader->load('engine.yml');
     }
 }
