@@ -12,34 +12,10 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @author Justus Klein <klein@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class ProductRuleBuilder extends BaseProductRuleBuilder
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function build(RuleDefinitionInterface $definition): RuleInterface
-    {
-        $this->eventDispatcher->dispatch(RuleEvents::PRE_BUILD, new RuleEvent($definition));
-
-        $rule       = $this->getRuleByRuleDefinition($definition);
-        $violations = $this->validateRule($rule);
-
-        if (count($violations) > 0) {
-            throw new BuilderException(
-                sprintf(
-                    'Impossible to build the rule "%s" as it does not appear to be valid (%s).',
-                    $definition->getCode(),
-                    $this->violationsToMessage($violations)
-                )
-            );
-        }
-
-        $this->eventDispatcher->dispatch(RuleEvents::POST_BUILD, new RuleEvent($definition));
-
-        return $rule;
-    }
-
     /**
      * @param RuleInterface $rule
      *
