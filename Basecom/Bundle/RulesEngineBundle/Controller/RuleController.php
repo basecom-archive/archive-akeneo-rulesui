@@ -143,7 +143,7 @@ class RuleController extends Controller
                 'is_localizable' => $attribute->isLocalizable(),
                 'is_scopable'    => $attribute->isScopable(),
                 'is_metric'      => $attribute->getMetricFamily() ? true : false,
-                'is_price'       => AttributeTypes::PRICE_COLLECTION === $attribute->getType() ? true : false,
+                'is_price'       => AttributeTypes::PRICE_COLLECTION === $attribute->getType() ? true : false
             ];
         }
 

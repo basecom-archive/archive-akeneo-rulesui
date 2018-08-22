@@ -1,7 +1,7 @@
 # Akeneo rules engine graphical interface
 ## Requirements
 
-Akeneo PIM Enterprise Edition 2.3.~
+Akeneo PIM Enterprise Edition 2.0.~
 
 ## Installation
 

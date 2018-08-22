@@ -75,7 +75,7 @@ class ConditionType extends AbstractType
         $this->channelRepository   = $channelRepository;
         $this->attributeRepository = $attributeRepository;
         $this->measureManager      = $measureManager;
-        $this->currencyRepository  = $currencyRepository;
+        $this->currencyRepository = $currencyRepository;
     }
 
     /**
