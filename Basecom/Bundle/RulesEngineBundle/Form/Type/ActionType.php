@@ -364,9 +364,9 @@ class ActionType extends AbstractType
         foreach ($attributes as $attribute) {
             $newArray[$attribute->getCode()] = $attribute->getCode();
         }
-        $newArray['group']    = 'group';
+        $newArray['group']      = 'group';
         $newArray['categories'] = 'categories';
-        $newArray['family']   = 'family';
+        $newArray['family']     = 'family';
 
         return $newArray;
     }
