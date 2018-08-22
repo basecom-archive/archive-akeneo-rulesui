@@ -32,7 +32,7 @@ class Condition
         'smaller'            => '<',
         'smaller_or_equal'   => '<=',
         'at least complete'  => 'AT_LEAST_COMPLETE',
-        'at least incomplete'=> 'AT_LEAST_INCOMPLETE'
+        'at least incomplete'=> 'AT_LEAST_INCOMPLETE',
     ];
 
     const MULTIPLE_VALUE_OPERATORS = [
@@ -99,13 +99,13 @@ class Condition
 
         $data['value'] = reset($this->values);
 
-        if('enabled' === $this->field || $this->field instanceof Attribute && AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
+        if ('enabled' === $this->field || $this->field instanceof Attribute && AttributeTypes::BOOLEAN === $this->field->getAttributeType()) {
             $data['value'] = (bool) $data['value'];
         }
 
         if ('' !== $this->currency && $this->field instanceof Attribute && AttributeTypes::PRICE_COLLECTION === $this->field->getType()) {
-            $data['value']             = [];
-            $data['value']['currency'] = $this->currency;
+            $data['value']               = [];
+            $data['value']['currency']   = $this->currency;
             $data['value']['amount']     = reset($this->values);
         }
 
@@ -147,7 +147,7 @@ class Condition
                 if (array_key_exists('unit', $data['value'])) {
                     $condition->values[] = $data['value']['amount'];
                     $condition->unit     = $data['value']['unit'];
-                } else if(array_key_exists('currency', $data['value'])) {
+                } elseif (array_key_exists('currency', $data['value'])) {
                     $condition->values[] = $data['value']['amount'];
                     $condition->currency = $data['value']['currency'];
                 } else {
