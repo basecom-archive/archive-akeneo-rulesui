@@ -18,13 +18,17 @@
       "email": "klein@basecom.de"
     },
     {
+      "name": "Jordan Kniest",
+      "email": "j.kniest@basecom.de"
+    }
+    {
       "name": "basecom GmbH & Co. KG",
       "email": "info@basecom.de"
     }
   ],
   "require": {
     "php": ">=7.0.0",
-    "akeneo/pim-enterprise-dev": "2.2.*"
+    "akeneo/pim-enterprise-dev": "2.3.*"
   },
   "autoload": {
     "psr-0": {
