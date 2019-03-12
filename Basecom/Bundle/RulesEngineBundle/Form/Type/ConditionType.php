@@ -2,14 +2,14 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\Form\Type;
 
-use Akeneo\Bundle\MeasureBundle\Manager\MeasureManager;
+use Akeneo\Tool\Bundle\MeasureBundle\Manager\MeasureManager;
 use Basecom\Bundle\RulesEngineBundle\DTO\Condition;
 use Basecom\Bundle\RulesEngineBundle\Form\DataTransformer\AttributeCodeToAttributeTransformer;
-use Pim\Bundle\CatalogBundle\Entity\Attribute;
-use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
-use Pim\Component\Catalog\Repository\ChannelRepositoryInterface;
-use Pim\Component\Catalog\Repository\CurrencyRepositoryInterface;
-use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
+use Akeneo\Pim\Structure\Component\Model\Attribute;
+use Akeneo\Pim\Structure\Component\Repository\AttributeRepositoryInterface;
+use Akeneo\Channel\Component\Repository\ChannelRepositoryInterface;
+use Akeneo\Channel\Component\Repository\CurrencyRepositoryInterface;
+use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

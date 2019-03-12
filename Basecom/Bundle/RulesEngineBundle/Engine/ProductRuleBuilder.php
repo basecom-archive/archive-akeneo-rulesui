@@ -2,12 +2,10 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\Engine;
 
-use Akeneo\Bundle\RuleEngineBundle\Event\RuleEvent;
-use Akeneo\Bundle\RuleEngineBundle\Event\RuleEvents;
-use Akeneo\Bundle\RuleEngineBundle\Exception\BuilderException;
-use Akeneo\Bundle\RuleEngineBundle\Model\RuleDefinitionInterface;
-use Akeneo\Bundle\RuleEngineBundle\Model\RuleInterface;
-use PimEnterprise\Component\CatalogRule\Engine\ProductRuleBuilder as BaseProductRuleBuilder;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Exception\BuilderException;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinitionInterface;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleInterface;
+use Akeneo\Pim\Automation\RuleEngine\Component\Engine\ProductRuleBuilder as BaseProductRuleBuilder;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**

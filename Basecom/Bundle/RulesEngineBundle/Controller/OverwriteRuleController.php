@@ -12,13 +12,14 @@
 namespace Basecom\Bundle\RulesEngineBundle\Controller;
 
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use PimEnterprise\Bundle\CatalogRuleBundle\Controller\RuleController as BaseRuleController;
+use Akeneo\Pim\Automation\RuleEngine\Bundle\Controller\RuleController as BaseRuleController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * OverwriteRule controller extends AkeneoRuleController to manipulate the Twig template.
  *
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class OverwriteRuleController extends BaseRuleController
 {

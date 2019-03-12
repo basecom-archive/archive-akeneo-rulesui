@@ -2,7 +2,7 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\DTO;
 
-use Akeneo\Bundle\RuleEngineBundle\Model\RuleDefinition as BaseRuleDefinition;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinition as BaseRuleDefinition;
 
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>

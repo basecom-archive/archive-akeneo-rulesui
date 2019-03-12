@@ -3,10 +3,10 @@
 namespace Basecom\Bundle\RulesEngineBundle\Form\Type;
 
 use Basecom\Bundle\RulesEngineBundle\DTO\Action;
-use Pim\Bundle\CatalogBundle\Entity\Attribute;
-use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
-use Pim\Component\Catalog\Repository\ChannelRepositoryInterface;
-use Pim\Component\Catalog\Repository\LocaleRepositoryInterface;
+use Akeneo\Pim\Structure\Component\Model\Attribute;
+use Akeneo\Pim\Structure\Component\Repository\AttributeRepositoryInterface;
+use Akeneo\Channel\Component\Repository\ChannelRepositoryInterface;
+use Akeneo\Channel\Component\Repository\LocaleRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class ActionType extends AbstractType
 {
