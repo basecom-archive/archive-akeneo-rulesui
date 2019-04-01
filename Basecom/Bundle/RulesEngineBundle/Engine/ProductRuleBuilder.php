@@ -3,10 +3,11 @@
 namespace Basecom\Bundle\RulesEngineBundle\Engine;
 
 use Akeneo\Tool\Bundle\RuleEngineBundle\Exception\BuilderException;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinition;
 use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinitionInterface;
 use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleInterface;
 use Akeneo\Pim\Automation\RuleEngine\Component\Engine\ProductRuleBuilder as BaseProductRuleBuilder;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
+use LogicException;
 
 /**
  * @author Justus Klein <klein@basecom.de>
@@ -15,13 +16,21 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class ProductRuleBuilder extends BaseProductRuleBuilder
 {
     /**
-     * @param RuleInterface $rule
-     *
-     * @return ConstraintViolationListInterface
+     * @param RuleDefinition $ruleDefinition
+     * @return array
      */
-    public function validateRule(RuleInterface $rule): ConstraintViolationListInterface
+    public function validateRule(RuleDefinition $ruleDefinition): array
     {
-        return $this->validator->validate($rule);
+        try {
+            $this->chainedDenormalizer->denormalize(
+                $ruleDefinition->getContent(),
+                $this->ruleClass,
+                'rule_content'
+            );
+            return [];
+        } catch (LogicException $e) {
+            return [$e->getMessage()];
+        }
     }
 
     /**
@@ -40,7 +49,7 @@ class ProductRuleBuilder extends BaseProductRuleBuilder
                 $this->ruleClass,
                 'rule_content'
             );
-        } catch (\LogicException $e) {
+        } catch (LogicException $e) {
             throw new BuilderException(
                 sprintf('Impossible to build the rule "%s". %s', $definition->getCode(), $e->getMessage())
             );

@@ -168,7 +168,7 @@ class RuleController extends Controller
         $ruleViolations = [];
         try {
             $rule           = $this->productRuleBuilder->getRuleByRuleDefinition($ruleDefinition);
-            $ruleViolations = $this->productRuleBuilder->validateRule($rule);
+            $ruleViolations = $this->productRuleBuilder->validateRule($ruleDefinition);
         } catch (\LogicException $e) {
             $form->addError(new FormError($e->getMessage()));
         }
