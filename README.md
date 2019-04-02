@@ -45,7 +45,7 @@ Clear you cache:
   
 - Operator Between and not Between is disabled 
 
-https://docs.akeneo.com/1.6/cookbook/rule/general_information_on_rule_format.html
+https://docs.akeneo.com/master/cookbook/rule/general_information_on_rule_format.html#enrichment-rule-structure
 
 ### Available Operators Conditions List
 - STARTS WITH
