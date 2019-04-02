@@ -1,7 +1,7 @@
 # Akeneo rules engine graphical interface
 ## Requirements
 
-Akeneo PIM Enterprise Edition 3.0
+Akeneo PIM Enterprise Edition 3.0.~
 
 ## Installation
 Enable the bundle in the `app/AppKernel.php` file in the `registerBundles()` method:

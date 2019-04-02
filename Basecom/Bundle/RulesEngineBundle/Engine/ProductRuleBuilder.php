@@ -67,7 +67,7 @@ class ProductRuleBuilder extends BaseProductRuleBuilder
                 $this->ruleClass,
                 'rule_content'
             );
-        } catch (LogicException $e) {
+        } catch (\LogicException $e) {
             throw new BuilderException(
                 sprintf('Impossible to build the rule "%s". %s', $definition->getCode(), $e->getMessage())
             );
