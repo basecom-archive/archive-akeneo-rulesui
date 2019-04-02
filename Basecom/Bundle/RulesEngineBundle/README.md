@@ -1,7 +1,7 @@
 # Akeneo rules engine graphical interface
 ## Requirements
 
-Akeneo PIM Enterprise Edition 1.6.~
+Akeneo PIM Enterprise Edition 3.0
 
 ## Installation
 Enable the bundle in the `app/AppKernel.php` file in the `registerBundles()` method:
@@ -12,7 +12,7 @@ Enable the bundle in the `app/AppKernel.php` file in the `registerBundles()` met
         new \Basecom\Bundle\RulesEngineBundle\BasecomRulesEngine(),
     ]
 ```
-Enable the route in the 'app/routing.yml' file 
+Enable the route in the 'app/config/routing.yml' file 
 
 ```php
     basecom_rules_routing:
@@ -22,10 +22,10 @@ Enable the route in the 'app/routing.yml' file
 Clear you cache:
 
 ```bash
-    php app/console cache:clear --env=prod
-    rm -rf app/cache/* ./web/bundles/* ./web/css/* ./web/js/*
-    app/console --env=prod pim:installer:assets
-    app/console --env=prod cache:warmup
+    php bin/console cache:clear --env=prod
+    rm -rf var/cache/* ./web/bundles/* ./web/css/* ./web/js/*
+    bin/console --env=prod pim:installer:assets
+    bin/console --env=prod cache:warmup
 ```
 
 
@@ -35,7 +35,7 @@ Clear you cache:
   
 - Operator Between and not Between is disabled 
 
-https://docs.akeneo.com/1.6/cookbook/rule/general_information_on_rule_format.html
+https://docs.akeneo.com/master/cookbook/rule/general_information_on_rule_format.html#enrichment-rule-structure
 
 ### Available Operators Conditions List
 - STARTS WITH

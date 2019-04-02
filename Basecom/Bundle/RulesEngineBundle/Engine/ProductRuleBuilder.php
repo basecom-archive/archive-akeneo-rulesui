@@ -3,34 +3,52 @@
 namespace Basecom\Bundle\RulesEngineBundle\Engine;
 
 use Akeneo\Tool\Bundle\RuleEngineBundle\Exception\BuilderException;
-use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinition;
-use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinitionInterface;
 use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleInterface;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinitionInterface;
 use Akeneo\Pim\Automation\RuleEngine\Component\Engine\ProductRuleBuilder as BaseProductRuleBuilder;
 use LogicException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Justus Klein <klein@basecom.de>
  * @author Jordan Kniest <j.kniest@basecom.de>
+ * @author Christopher Steinke <c.steinke@basecom.de>
  */
 class ProductRuleBuilder extends BaseProductRuleBuilder
 {
     /**
-     * @param RuleDefinition $ruleDefinition
-     * @return array
+     * @var ValidatorInterface
      */
-    public function validateRule(RuleDefinition $ruleDefinition): array
+    protected $validator;
+
+    /**
+     * ProductRuleBuilder constructor.
+     * @param DenormalizerInterface $chainedDenormalizer
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param $ruleClass
+     * @param ValidatorInterface $validator
+     */
+    public function __construct(
+        DenormalizerInterface $chainedDenormalizer,
+        EventDispatcherInterface $eventDispatcher,
+        $ruleClass,
+        ValidatorInterface $validator
+    ) {
+        parent::__construct($chainedDenormalizer, $eventDispatcher, $ruleClass);
+        $this->validator = $validator;
+    }
+
+    /**
+     * @param RuleInterface $rule
+     *
+     * @return ConstraintViolationListInterface
+     */
+    public function validateRule(RuleInterface $rule): ConstraintViolationListInterface
     {
-        try {
-            $this->chainedDenormalizer->denormalize(
-                $ruleDefinition->getContent(),
-                $this->ruleClass,
-                'rule_content'
-            );
-            return [];
-        } catch (LogicException $e) {
-            return [$e->getMessage()];
-        }
+        return $this->validator->validate($rule);
     }
 
     /**
