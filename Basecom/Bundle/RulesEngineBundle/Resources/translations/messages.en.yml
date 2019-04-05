@@ -16,6 +16,8 @@ basecom:
 btn:
   create:
     rule: 'Add new rule'
+pim_enrich:
+  create:
     add-another-action: 'Add new action'
     add-another-condition: 'Add new condition'
 page_title:

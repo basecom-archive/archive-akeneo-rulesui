@@ -2,11 +2,12 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\DTO;
 
-use Pim\Bundle\CatalogBundle\Entity\Attribute;
-use Pim\Component\Catalog\AttributeTypes;
+use Akeneo\Pim\Structure\Component\Model\Attribute;
+use Akeneo\Pim\Structure\Component\AttributeTypes;
 
 /**
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class Condition
 {

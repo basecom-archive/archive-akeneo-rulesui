@@ -3,13 +3,14 @@
 namespace Basecom\Bundle\RulesEngineBundle\Form\DataTransformer;
 
 use Basecom\Bundle\RulesEngineBundle\Form\Type\ConditionType;
-use Pim\Bundle\CatalogBundle\Entity\Attribute;
-use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
+use Akeneo\Pim\Structure\Component\Model\Attribute;
+use Akeneo\Pim\Structure\Component\Repository\AttributeRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Justus Klein <klein@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class AttributeCodeToAttributeTransformer implements DataTransformerInterface
 {

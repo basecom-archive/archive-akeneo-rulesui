@@ -2,16 +2,16 @@
 
 namespace Basecom\Bundle\RulesEngineBundle\Controller;
 
-use Akeneo\Bundle\RuleEngineBundle\Doctrine\Common\Saver\RuleDefinitionSaver;
-use Akeneo\Bundle\RuleEngineBundle\Doctrine\ORM\Repository\RuleDefinitionRepository;
-use Akeneo\Bundle\RuleEngineBundle\Model\RuleDefinition;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Doctrine\Common\Saver\RuleDefinitionSaver;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Doctrine\ORM\Repository\RuleDefinitionRepository;
+use Akeneo\Tool\Bundle\RuleEngineBundle\Model\RuleDefinition;
 use Basecom\Bundle\RulesEngineBundle\DTO\RuleDefinition as RuleDefinitionDTO;
 use Basecom\Bundle\RulesEngineBundle\Engine\ProductRuleBuilder;
 use Basecom\Bundle\RulesEngineBundle\Form\Type\RuleDefinitionType;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Pim\Bundle\CatalogBundle\Entity\Attribute;
-use Pim\Component\Catalog\AttributeTypes;
-use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
+use Akeneo\Pim\Structure\Component\Model\Attribute;
+use Akeneo\Pim\Structure\Component\AttributeTypes;
+use Akeneo\Pim\Structure\Component\Repository\AttributeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
@@ -28,6 +28,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  * RuleController.
  *
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
+ * @author Jordan Kniest <j.kniest@basecom.de>
  */
 class RuleController extends Controller
 {
