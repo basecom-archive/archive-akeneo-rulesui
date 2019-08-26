@@ -20,6 +20,6 @@ pim_enrich:
   create:
     add-another-action: 'Add new action'
     add-another-condition: 'Add new condition'
-page_title:
+pim_title:
   basecom_rule_edit: 'edit Rule'
   basecom_rule_create: 'create Rule'

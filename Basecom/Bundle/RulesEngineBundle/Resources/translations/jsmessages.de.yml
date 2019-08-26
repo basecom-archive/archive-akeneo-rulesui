@@ -7,5 +7,5 @@ basecom.flash.rule.error.copy: 'Das kopieren von 2 gleichen feldern ist nicht ge
 btn.create.rule: 'Neue Rule erstellen'
 pim_enrich.create.add-another-action: 'Neue Action hinzufügen'
 pim_enrich.create.add-another-condition: 'Neue Condition hinzufügen'
-page_title.basecom_rule_edit: 'Regel bearbeiten'
-page_title.basecom_rule_create: 'neue Regel erstellen'
+pim_title.basecom_rule_edit: 'Regel bearbeiten'
+pim_title.basecom_rule_create: 'neue Regel erstellen'

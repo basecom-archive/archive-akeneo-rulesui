@@ -7,5 +7,5 @@ basecom.flash.rule.error.copy: 'it is not allowed to copy from / to the same fie
 btn.create.rule: 'Add new rule'
 pim_enrich.create.add-another-action: 'Add new action'
 pim_enrich.create.add-another-condition: 'Add new condition'
-page_title.basecom_rule_edit: 'edit Rule'
-page_title.basecom_rule_create: 'create Rule'
+pim_title.basecom_rule_edit: 'edit Rule'
+pim_title.basecom_rule_create: 'create Rule'
