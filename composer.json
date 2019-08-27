@@ -28,7 +28,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "akeneo/pim-enterprise-dev": "3.0.*"
+    "akeneo/pim-enterprise-dev": "^3.2"
   },
   "autoload": {
     "psr-0": {
