@@ -1,6 +1,6 @@
 {% block _rule_definition_actions_row %}
+    {% import 'BasecomRulesEngine::macros.html.twig' as elements %}
     {{ form_label(form) }}
-    {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
     {{ elements.createBtn('add-another-action', null,{'id' : 'create-add-another-action'}) }}
     <hr>
     <div class="AknFieldContainer rule-action-container">
@@ -31,7 +31,7 @@
 
 {% block _rule_definition_conditions_row %}
     {{ form_label(form) }}
-    {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    {% import 'BasecomRulesEngine::macros.html.twig' as elements %}
     {{ elements.createBtn('add-another-condition', null,{'id' : 'create-add-another-condition'}) }}
     <hr>
     <div class="AknFieldContainer rule-condition-container">

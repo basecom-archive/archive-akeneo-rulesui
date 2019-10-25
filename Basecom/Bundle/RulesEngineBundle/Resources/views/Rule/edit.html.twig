@@ -1,8 +1,7 @@
-{% import 'BasecomRulesEngine::macros.html.twig' as elements %}
-
 {% form_theme form 'BasecomRulesEngine::form_themes.html.twig' %}
 {% block content %}
     {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    {% import 'BasecomRulesEngine::macros.html.twig' as bscElements %}
     <div class="AknDefault-mainContent basecom-rule">
         {% set action = path('basecom_rule_create') %}
         {% if ruleDefinition.id is not null %}
@@ -19,7 +18,7 @@
             }
         }) }}
         {% set buttons %}
-            {{ elements.createBtn('basecom-logo', null, {'id' : 'basecom-logo'}) }}
+            {{ bscElements.createBtn('basecom-logo', null, {'id' : 'basecom-logo'}) }}
             {% if ruleDefinition.id is defined and ruleDefinition.id is not null %}
                 {{ elements.deleteLink(
                 path('pimee_catalog_rule_rule_delete', { id: ruleDefinition.id }),
