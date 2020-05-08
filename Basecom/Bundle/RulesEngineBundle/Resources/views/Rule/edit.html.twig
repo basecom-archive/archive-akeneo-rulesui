@@ -70,8 +70,8 @@
     {% endfor %}
     {% set messages = messages|merge({ (type): typeMessages }) %}
 {% endfor %}
-<script>window.flashMessages = JSON.parse('{{ messages|json_encode()|raw }}');</script>
-<script type="text/javascript">
+<script nonce="e6baa04a331595aa563b2777cb83bfc48e9157aa">window.flashMessages = JSON.parse('{{ messages|json_encode()|raw }}');</script>
+<script type="text/javascript" nonce="e6baa04a331595aa563b2777cb83bfc48e9157aa">
     require(
         [
             'jquery',

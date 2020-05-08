@@ -12,7 +12,7 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Akeneo\Pim\Structure\Component\Model\Attribute;
 use Akeneo\Pim\Structure\Component\AttributeTypes;
 use Akeneo\Pim\Structure\Component\Repository\AttributeRepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  * @author Peter van der Zwaag <vanderzwaag@basecom.de>
  * @author Jordan Kniest <j.kniest@basecom.de>
  */
-class RuleController extends Controller
+class RuleController extends AbstractController
 {
     /**
      * @var RouterInterface

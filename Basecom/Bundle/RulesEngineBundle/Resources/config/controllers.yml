@@ -1,11 +1,11 @@
 #overwrite the standard akeneo controller to extend the datagrid view
 parameters:
-    basecom_rule_engine.controller.rule.class: Basecom\Bundle\RulesEngineBundle\Controller\RuleController
-    pimee_catalog_rule.controller.rule.class: Basecom\Bundle\RulesEngineBundle\Controller\OverwriteRuleController
+    basecom_rule_engine.controller.rule.class: 'Basecom\Bundle\RulesEngineBundle\Controller\RuleController'
+    pimee_catalog_rule.controller.rule.class:  'Basecom\Bundle\RulesEngineBundle\Controller\OverwriteRuleController'
 
 services:
     basecom.controller.rule:
-        scope: request
+        public: true
         class: '%basecom_rule_engine.controller.rule.class%'
         arguments:
             - '@router'

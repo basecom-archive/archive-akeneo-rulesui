@@ -28,8 +28,8 @@ class BasecomRulesEngineExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('form_types.yml');
         $loader->load('controllers.yml');
         $loader->load('engine.yml');
+        $loader->load('form_types.yml');
     }
 }
