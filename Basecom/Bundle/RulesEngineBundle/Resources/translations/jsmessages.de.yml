@@ -8,7 +8,7 @@ basecom:
             saved: 'Regel gespeichert'
             error:
                 save: 'Regel konnte nicht gespeichert werden'
-                copy: 'Das kopieren von 2 gleichen feldern ist nicht gestattet'
+                copy: 'Das Kopieren von 2 gleichen Feldern ist nicht gestattet'
 btn:
     create:
         rule: 'Neue Rule erstellen'
