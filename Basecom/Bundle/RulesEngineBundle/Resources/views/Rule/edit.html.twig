@@ -24,7 +24,7 @@
                 path('pimee_catalog_rule_rule_delete', { id: ruleDefinition.id }),
                 'pim_enrich_attribute_remove',
                 path('pimee_catalog_rule_rule_index'),
-                'confirmation.remove.item'|trans({ '%name%': form.vars.name }),
+                'pim_common.confirm_deletion'|trans({ '%name%': form.vars.name }),
                 'basecom.flash.rule.removed'|trans,
                 null,
                 'AknButton AknButton--important'
