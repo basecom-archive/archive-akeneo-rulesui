@@ -95,6 +95,8 @@
                     breadcrumbs.render();
                     $('*[data-drop-zone="breadcrumbs"]').append(breadcrumbs.$el);
                 });
+
+                new EditView({{ attributesData | json_encode | raw }});
             });
         }
     );
