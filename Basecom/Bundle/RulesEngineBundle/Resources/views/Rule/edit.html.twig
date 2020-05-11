@@ -91,7 +91,10 @@
                 breadcrumbs.configure();
                 FetcherRegistry.initialize();
 
-                new EditView({{ attributesData | json_encode | raw }});
+                breadcrumbs.configure().then(function () {
+                    breadcrumbs.render();
+                    $('*[data-drop-zone="breadcrumbs"]').append(breadcrumbs.$el);
+                });
             });
         }
     );
