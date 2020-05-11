@@ -91,7 +91,7 @@
                 breadcrumbs.configure();
                 FetcherRegistry.initialize();
 
-                breadcrumbs.configure().then(function () {
+                breadcrumbs.configure().then(() => {
                     breadcrumbs.render();
                     $('*[data-drop-zone="breadcrumbs"]').append(breadcrumbs.$el);
                 });
