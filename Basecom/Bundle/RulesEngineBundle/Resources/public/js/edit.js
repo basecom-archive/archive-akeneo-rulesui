@@ -115,7 +115,7 @@ define(
                 var addActionButton    = $('#create-add-another-action');
 
                 addConditionButton.unbind('click');
-                addConditionButton.click(function (e) {
+                addConditionButton.on('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
 

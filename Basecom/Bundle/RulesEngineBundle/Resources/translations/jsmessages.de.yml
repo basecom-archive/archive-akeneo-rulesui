@@ -1,11 +1,19 @@
-basecom.rules_engine.menu_entry: 'Regel hinzufügen'
-basecom.rules_engine.edit: 'Regel bearbeiten'
-basecom.flash.rule.removed: 'Regel entfernt'
-basecom.flash.rule.saved: 'Regel gespeichert'
-basecom.flash.rule.error.save: 'Regel konnte nicht gespeichert werden'
-basecom.flash.rule.error.copy: 'Das kopieren von 2 gleichen feldern ist nicht gestattet'
-btn.create.rule: 'Neue Rule erstellen'
-pim_enrich.create.add-another-action: 'Neue Action hinzufügen'
-pim_enrich.create.add-another-condition: 'Neue Condition hinzufügen'
-page_title.basecom_rule_edit: 'Regel bearbeiten'
-page_title.basecom_rule_create: 'neue Regel erstellen'
+basecom:
+    rules_engine:
+        menu_entry: 'Regel hinzufügen'
+        edit: 'Regel bearbeiten'
+    flash:
+        rule:
+            removed: 'Regel entfernt'
+            saved: 'Regel gespeichert'
+            error:
+                save: 'Regel konnte nicht gespeichert werden'
+                copy: 'Das Kopieren von 2 gleichen Feldern ist nicht gestattet'
+btn:
+    create:
+        rule: 'Neue Rule erstellen'
+        add-another-action: 'Neue Action hinzufügen'
+        add-another-condition: 'Neue Condition hinzufügen'
+pim_title:
+    basecom_rule_edit: 'Regel bearbeiten'
+    basecom_rule_create: 'neue Regel erstellen'

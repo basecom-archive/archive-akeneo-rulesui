@@ -1,6 +1,7 @@
 {% form_theme form 'BasecomRulesEngine::form_themes.html.twig' %}
 {% block content %}
     {% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+    {% import 'BasecomRulesEngine::macros.html.twig' as bscElements %}
     <div class="AknDefault-mainContent basecom-rule">
         {% set action = path('basecom_rule_create') %}
         {% if ruleDefinition.id is not null %}
@@ -17,13 +18,13 @@
             }
         }) }}
         {% set buttons %}
-            {{ elements.createBtn('basecom-logo', null, {'id' : 'basecom-logo'}) }}
+            {{ bscElements.createBtn('basecom-logo', null, {'id' : 'basecom-logo'}) }}
             {% if ruleDefinition.id is defined and ruleDefinition.id is not null %}
                 {{ elements.deleteLink(
                 path('pimee_catalog_rule_rule_delete', { id: ruleDefinition.id }),
                 'pim_enrich_attribute_remove',
                 path('pimee_catalog_rule_rule_index'),
-                'confirmation.remove.item'|trans({ '%name%': form.vars.name }),
+                'pim_common.confirm_deletion'|trans({ '%name%': form.vars.name }),
                 'basecom.flash.rule.removed'|trans,
                 null,
                 'AknButton AknButton--important'
@@ -69,8 +70,8 @@
     {% endfor %}
     {% set messages = messages|merge({ (type): typeMessages }) %}
 {% endfor %}
-<script>window.flashMessages = JSON.parse('{{ messages|json_encode()|raw }}');</script>
-<script type="text/javascript">
+<script nonce="{{ js_nonce() }}">window.flashMessages = JSON.parse('{{ messages|json_encode()|raw }}');</script>
+<script type="text/javascript" nonce="{{ js_nonce() }}">
     require(
         [
             'jquery',
@@ -89,6 +90,11 @@
 
                 breadcrumbs.configure();
                 FetcherRegistry.initialize();
+
+                breadcrumbs.configure().then(() => {
+                    breadcrumbs.render();
+                    $('*[data-drop-zone="breadcrumbs"]').append(breadcrumbs.$el);
+                });
 
                 new EditView({{ attributesData | json_encode | raw }});
             });

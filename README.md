@@ -14,15 +14,15 @@ $ composer require basecom/akeneo-rules-ui
 or include the bundle in your `composer.json` with the desired version.
 
 ### After installation
-Enable the bundle in the `app/AppKernel.php` file in the `registerBundles()` method:
+Enable the bundle in the `config/bundles.php` file like:
 
 ```php
-    $bundles = [
+    return [
         // ...
-        new \Basecom\Bundle\RulesEngineBundle\BasecomRulesEngine(),
+        Basecom\Bundle\RulesEngineBundle\BasecomRulesEngine::class => ['all' => true],
     ]
 ```
-Enable the route in the 'app/config/routing.yml' file 
+Enable the route in the 'config/routes/routes.yml' file 
 
 ```php
     basecom_rules_routing:
@@ -35,6 +35,7 @@ Clear you cache:
     bin/console cache:clear --no-warmup --env=prod
     bin/console pim:install:assets --env=prod
     bin/console cache:warmup --env=prod
+    yarn run less
     yarn run webpack
 ```
 

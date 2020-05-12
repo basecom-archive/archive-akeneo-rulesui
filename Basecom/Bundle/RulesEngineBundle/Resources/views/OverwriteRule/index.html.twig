@@ -1,6 +1,7 @@
 {% import 'PimDataGridBundle::macros.html.twig' as dataGrid %}
 
 {% block content %}
+    {% import 'BasecomRulesEngine::macros.html.twig' as elements %}
     {% if resource_granted('pimee_catalog_rule_rule_execute_permissions') %}
         {% set buttons %}
             {{ elements.confirmLink(

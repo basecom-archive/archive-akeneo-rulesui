@@ -16,7 +16,12 @@
     margin-right: 20px;
   }
 }
-
+.AknFieldContainer-label {
+  display: unset;
+}
+.AknFieldContainer-inputContainer {
+  width: 100%;
+}
 .basecom-rule {
   .btn.remove {
     cursor: pointer;
@@ -62,6 +67,7 @@
   }
   #create-add-another-action, #create-add-another-condition {
     float: right;
+    margin-right: 30px;
   }
   .AknFieldContainer {
     &.condition-field-unit,
@@ -172,7 +178,7 @@
         .remove {
           position: absolute;
           top: 5px;
-          right: 5px;
+          right: 30px;
         }
         .condition-field-scope {
           display: none;
@@ -303,7 +309,7 @@
         .remove {
           position: absolute;
           top: 5px;
-          right: 5px;
+          right: 30px;
         }
         .action-field-locale {
           display: none;
