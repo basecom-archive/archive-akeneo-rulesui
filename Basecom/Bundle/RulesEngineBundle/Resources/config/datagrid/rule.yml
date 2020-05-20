@@ -20,7 +20,7 @@ datagrid:
             actions:
                 label: pimee_catalog_rule.datagrid.rule-grid.column.actions
                 type: twig
-                template: AkeneoPimRuleEngineBundle:Rule:_actions.html.twig
+                template: BasecomRulesEngine:Rule:_actions.html.twig
                 frontend_type: html
                 data_name: content
             impactedSubjectCount:
