@@ -9,3 +9,10 @@ extensions:
             label: basecom.rules_engine.menu_entry
             route: basecom_rule_create
             buttonClass: AknButton AknButton--apply create-new-rule
+
+    pim-rule-index-pagination-bottom:
+        module: oro/datagrid/pagination-input
+        parent: pim-rule-index
+        targetZone: bottom-panel
+        config:
+            gridName: rule-grid
